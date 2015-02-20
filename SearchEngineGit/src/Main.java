@@ -1,12 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
 
-/*
- * TO DO: MAKE SCALE TO RESIZE
- * IMPLIMENT STUB METHODS READY TO BE GIVEN FUNCTIONALITY
- * MAKE EVERYTHING LOOKS PRETTIER
- * 
- */
 
 public class Main extends Frame {
 	
@@ -31,9 +25,9 @@ public class Main extends Frame {
 		//creates new pannel
 		Panel top = new Panel();
 		//add panel to north of layout
-		add(top, BorderLayout.NORTH);
-		Label searchTxt = new Label("Search");
-		TextField search = new TextField("",58);
+		add(top, BorderLayout.PAGE_START);
+		Label searchTxt = new Label("Search Terms");
+		TextField search = new TextField("",28);
 		Button searchBtn = new Button("Search");
 		
 		top.add(searchTxt);
@@ -42,22 +36,20 @@ public class Main extends Frame {
 		// create new text area
 		TextArea searchResult = new TextArea("",30, 30, TextArea.SCROLLBARS_NONE);
 		searchResult.setEditable(false);
-		add(searchResult, BorderLayout.SOUTH);
+		add(searchResult, BorderLayout.CENTER);
+		
+		// Bar underneath the Search Textbox, will be used for the Search Type options
+		
 		
 		//menu bar
 		
 		MenuBar menu = new MenuBar();
 		Menu fileMenu = new Menu( "File");
-		Menu searchType = new Menu( "Search Type");
 		MenuItem maint = new MenuItem("Maintenance"); //creates menu item
 		fileMenu.add(maint); //adds menu item
 		MenuItem about = new MenuItem("About");
 		fileMenu.add(about);
-		searchType.add( new MenuItem("Search Terms"));
-		searchType.add( new MenuItem("Any Search Term"));
-		searchType.add( new MenuItem("Exact Phrase"));
 		menu.add(fileMenu);
-		menu.add(searchType);
 		setMenuBar(menu);
 		
 		maint.addActionListener( new ActionListener()
@@ -80,6 +72,7 @@ public class Main extends Frame {
 	}
 	
 	//Maintence Window
+
 	public Main ( String maintence){
 		setTitle("Search Engine");
 		setSize ( 600 , 400);
@@ -121,5 +114,4 @@ public class Main extends Frame {
 		setVisible(true);
 
 	}
-
 }
