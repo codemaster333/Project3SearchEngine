@@ -10,7 +10,7 @@ public class Main extends Frame {
 		setTitle("Search Engine");
 		setSize ( 600 , 400);
 		setBackground(Color.white);
-		//setLocation ( 600, 600);
+		setLocation (500,500);
 		addWindowListener( new WindowAdapter()
 		{
 			public void windowClosing( WindowEvent e)
@@ -38,28 +38,71 @@ public class Main extends Frame {
 		searchResult.setEditable(false);
 		add(searchResult, BorderLayout.CENTER);
 		
-		// Bar underneath the Search Textbox, will be used for the Search Type options
+		// Bar underneath the Search Textbox
+		Panel middle = new Panel();
+		add (middle, BorderLayout.PAGE_END);
+		Label searchType = new Label ("Search Type: ");
+		
+		//AWT does not allow for radio buttons so checkboxes are used
+		CheckboxGroup choices = new CheckboxGroup();
+		Checkbox searchTerms = new Checkbox("Search Terms", choices, true);
+		Checkbox anySearch = new Checkbox("Any Search Terms", choices, true);
+		Checkbox exactPhrase = new Checkbox("Exact Phrase", choices, true);
+		
+		middle.add(searchType);
+		middle.add(searchTerms);
+		middle.add(anySearch);
+		middle.add(exactPhrase);
 		
 		
-		//menu bar
+		// Menu Bar
 		
 		MenuBar menu = new MenuBar();
-		Menu fileMenu = new Menu( "File");
-		MenuItem maint = new MenuItem("Maintenance"); //creates menu item
-		fileMenu.add(maint); //adds menu item
-		MenuItem about = new MenuItem("About");
-		fileMenu.add(about);
-		menu.add(fileMenu);
 		setMenuBar(menu);
 		
-		maint.addActionListener( new ActionListener()
-		{
-			public void actionPerformed (ActionEvent e)
+		// Menu Choices
+		Menu fileMenu = new Menu("File");
+		Menu helpMenu = new Menu ("Help");
+		
+		
+		
+		// File Menu
+			menu.add(fileMenu);
+			MenuItem maint = new MenuItem("Maintenance"); //Creates Menu Item for Maintenance
+			MenuItem exit = new MenuItem("Exit");
+			
+			fileMenu.add(maint); 
+			fileMenu.add(exit);
+			
+		// Help Menu
+			menu.add(helpMenu);
+			MenuItem viewHelp = new MenuItem("View Help");
+			MenuItem about = new MenuItem("About");
+			
+			helpMenu.add(viewHelp);
+			helpMenu.add(about);
+			
+		// Action Listeners for File and Help Commands
+			maint.addActionListener( new ActionListener()
 			{
-				Frame maintence = new Main("maintence");
+				public void actionPerformed (ActionEvent e)
+				{
+					Frame maintenance = new Main("maintenance");
 				
-			}
-		}); 
+				}
+			}); 
+		
+		
+		   viewHelp.addActionListener (new ActionListener()
+		   {
+				public void actionPerformed (ActionEvent e)
+				{
+				    Frame help = new Main("Help");
+				}
+			});
+			
+			
+		
 		
 		
 		
@@ -71,9 +114,9 @@ public class Main extends Frame {
 		frame.setVisible( true );
 	}
 	
-	//Maintence Window
+	// Maintenance Window
 
-	public Main ( String maintence){
+	public Main ( String maintenance){
 		setTitle("Search Engine");
 		setSize ( 600 , 400);
 		setBackground(Color.white);
@@ -86,6 +129,8 @@ public class Main extends Frame {
 			}
 		});
 		
+
+		
 		//layout
 		
 		
@@ -95,8 +140,8 @@ public class Main extends Frame {
 		add(top, BorderLayout.NORTH);
 		Panel flowNorth = new Panel();
 		top.add(flowNorth, BorderLayout.NORTH);
-		Label searchMaintence = new Label("Search Engine- Index");
-		flowNorth.add(searchMaintence);
+		Label searchMaintenance = new Label("Search Engine- Index");
+		flowNorth.add(searchMaintenance);
 		Panel flowCenter = new Panel();
 		add(flowCenter, BorderLayout.CENTER);
 		Button addFile = new Button("Add file");
@@ -114,4 +159,22 @@ public class Main extends Frame {
 		setVisible(true);
 
 	}
+	
+	
+		// Help Information Frame
+		
+		public Main (String help)
+		{
+			setTitle("Help");
+			setSize ( 600 , 400);
+			setBackground(Color.white);
+			//setLocation ( 600, 600);
+			addWindowListener( new WindowAdapter()
+			{
+				public void windowClosing( WindowEvent e)
+				{
+					dispose(); //Closes current window without closing whole program
+				}
+			});
+		}
 }
