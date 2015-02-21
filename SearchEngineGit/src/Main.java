@@ -1,3 +1,14 @@
+/* Search Engine created by Group Pop Culture Reference
+ *
+ * Comprising of Jordan Hart, Brannon Centeno, Kish Moore
+ * and Alexis Herrera.
+ *
+ * This program takes in text files and allows users to 
+ * search for terms in said files
+ *
+ */
+
+
 import java.awt.*;
 import java.awt.event.*;
 
