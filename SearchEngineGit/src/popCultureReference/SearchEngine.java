@@ -10,7 +10,9 @@ package popCultureReference;/* Search Engine created by Group Pop Culture Refere
  * This version is done completely in Swing 
  * and renamed popCultureReference.SearchEngine.java to differentiate it from the Main
  * in the master branch
- *  
+ *
+ *  Packaged it!- Brannon
+ *
  */
 
 
@@ -45,6 +47,7 @@ public class SearchEngine {
 		frame = new JFrame();
 		frame.setTitle("Search Engine");
 		frame.setBounds(100, 100, 600, 400);
+		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				
 		/* Menu Bar
