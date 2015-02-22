@@ -12,8 +12,9 @@ package popCultureReference;/* Search Engine created by Group Pop Culture Refere
  * in the master branch
  *
  *  Brannon
- *  Made some action listeners for the file
- *
+ *  Made some action listeners for the file and help menu
+ *  Made it so the radio buttons deselect if you choose a different one
+ *  Made it so that when the Maintenance button is pressed, a new window pops up
  */
 
 
@@ -136,21 +137,31 @@ public class SearchEngine {
 		/* Low Bar */
 		
 		JPanel searchTypePanel = new JPanel();
-		frame.getContentPane().add(searchTypePanel, BorderLayout.SOUTH);
+
 		
 		JLabel searchTypeLabel = new JLabel("Search Type:");
 		searchTypePanel.add(searchTypeLabel);
 		
-		JRadioButton allSearchTermButton = new JRadioButton("All Search Terms");
-		searchTypePanel.add(allSearchTermButton);
-		
-		JRadioButton anySearchButton = new JRadioButton("Any Search Terms");
-		searchTypePanel.add(anySearchButton);
-		
-		JRadioButton exactPhraseButton = new JRadioButton("Exact Phrase");
+		JRadioButton allSearchTermButton = new JRadioButton();
+		allSearchTermButton.setText("All Search Terms");
+
+		JRadioButton anySearchButton = new JRadioButton();
+		anySearchButton.setText("Any Search Terms");
+
+		JRadioButton exactPhraseButton = new JRadioButton();
+		exactPhraseButton.setText("Exact Phrase");
 		searchTypePanel.add(exactPhraseButton);
-		
-		
+
+		ButtonGroup group = new ButtonGroup();
+		group.add(allSearchTermButton);
+		group.add(anySearchButton);
+		group.add(exactPhraseButton);
+
+		searchTypePanel.add(allSearchTermButton);
+		searchTypePanel.add(anySearchButton);
+		searchTypePanel.add(exactPhraseButton);
+
+		frame.getContentPane().add(searchTypePanel, BorderLayout.SOUTH);
 	}
 
 }

@@ -12,7 +12,14 @@ public class MaintenanceGUI {
 
     private JFrame frame;
 
+/*
 
+
+ Put the GUI components of the maintenance window here.
+ We could probably put this in SearchEngine.java, but I thought
+ it'd be nicer to add all the components without seeing all that code.
+
+  */
     MaintenanceGUI(){
         System.out.println("Hello World");
         initialize();
