@@ -52,6 +52,13 @@ public class SearchEngine {
 		}
 	}
 
+	class ViewHelpMenuListener implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+
+			JOptionPane.showMessageDialog(null, "Need to create help menu");
+		}
+	}
+
 	/**
 	 * Create the application.
 	 */
@@ -100,6 +107,7 @@ public class SearchEngine {
 		menuBar.add(helpMenu);
 		
 		JMenuItem viewHelpItem = new JMenuItem("View Help");
+		viewHelpItem.addActionListener(new ViewHelpMenuListener());
 		helpMenu.add(viewHelpItem);
 		
 		JMenuItem aboutItem = new JMenuItem("About");
