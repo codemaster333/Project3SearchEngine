@@ -41,25 +41,12 @@ public class SearchEngine {
 					window.frame.setVisible(true);
 	}
 
-	//ActionListener for MaintenanceGUI
-	class MaintenanceGraphical implements ActionListener{
-
-		public void actionPerformed(ActionEvent e){
-
-			new MaintenanceGUI();
-
+	//ActionListeners for drop down menu buttons
+	class MaintenanceGraphical implements ActionListener{public void actionPerformed(ActionEvent e){new MaintenanceGUI();}}
+	class ExitThatBitch implements ActionListener{public void actionPerformed(ActionEvent e){System.exit(0);}}
+	class AboutMenuListener implements ActionListener{public void actionPerformed(ActionEvent e){
+		JOptionPane.showMessageDialog(null, "Jordan Hart, Brannon Centeno, Kish Moore and Alexis Herrera");
 		}
-
-	}
-
-	class ExitThatBitch implements ActionListener{
-
-		public void actionPerformed(ActionEvent e){
-
-			System.exit(0);
-
-		}
-
 	}
 
 	/**
@@ -113,6 +100,7 @@ public class SearchEngine {
 		helpMenu.add(viewHelpItem);
 		
 		JMenuItem aboutItem = new JMenuItem("About");
+		aboutItem.addActionListener(new AboutMenuListener());
 		helpMenu.add(aboutItem);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
