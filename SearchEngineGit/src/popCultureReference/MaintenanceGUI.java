@@ -30,7 +30,7 @@ public class MaintenanceGUI {
         frame.setTitle("Maintenance");
         frame.setBounds(100, 100, 600, 400);
         frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);<----This will terminate the entire program. We don't want that.
         frame.setVisible(true);
 
     }
