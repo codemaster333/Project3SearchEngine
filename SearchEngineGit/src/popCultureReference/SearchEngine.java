@@ -48,7 +48,7 @@ public class SearchEngine {
 	class MaintenanceGraphical implements ActionListener{public void actionPerformed(ActionEvent e){new MaintenanceGUI();}}
 	class ExitThatBitch implements ActionListener{public void actionPerformed(ActionEvent e){System.exit(0);}}
 	class AboutMenuListener implements ActionListener{public void actionPerformed(ActionEvent e){
-		JOptionPane.showMessageDialog(null, "Jordan Hart, Brannon Centeno, Kish Moore and Alexis Herrera");
+		JOptionPane.showMessageDialog(null, " Created by Jordan Hart, Brannon Centeno, Kish Moore and Alexis Herrera");
 		}
 	}
 
