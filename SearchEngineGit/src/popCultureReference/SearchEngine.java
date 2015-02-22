@@ -19,11 +19,19 @@ package popCultureReference;/* Search Engine created by Group Pop Culture Refere
 import javax.swing.*;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.logging.Handler;
+
 
 
 public class SearchEngine {
 
+
+
 	private JFrame frame;
+
+
 
 	/**
 	 * Launch the application.
@@ -31,6 +39,27 @@ public class SearchEngine {
 	public static void main(String[] args) {
 					SearchEngine window = new SearchEngine();
 					window.frame.setVisible(true);
+	}
+
+	//ActionListener for MaintenanceGUI
+	class MaintenanceGraphical implements ActionListener{
+
+		public void actionPerformed(ActionEvent e){
+
+			new MaintenanceGUI();
+
+		}
+
+	}
+
+	class ExitThatBitch implements ActionListener{
+
+		public void actionPerformed(ActionEvent e){
+
+			System.exit(0);
+
+		}
+
 	}
 
 	/**
@@ -65,10 +94,14 @@ public class SearchEngine {
 		menuBar.add(fileMenu);
 		
 		JMenuItem maintenanceItem = new JMenuItem("Maintenance");
+		maintenanceItem.addActionListener(new MaintenanceGraphical());
 		fileMenu.add(maintenanceItem);
+
 		
 		JMenuItem exitItem = new JMenuItem("Exit");
+		exitItem.addActionListener(new ExitThatBitch());
 		fileMenu.add(exitItem);
+
 
 		
 		/* Help Menu Bar containing View Help and About Menu Options */
@@ -119,14 +152,14 @@ public class SearchEngine {
 		JLabel searchTypeLabel = new JLabel("Search Type:");
 		searchTypePanel.add(searchTypeLabel);
 		
-		JRadioButton searchTermRButton = new JRadioButton("All Search Terms");
-		searchTypePanel.add(searchTermRButton);
+		JRadioButton allSearchTermButton = new JRadioButton("All Search Terms");
+		searchTypePanel.add(allSearchTermButton);
 		
-		JRadioButton anySearchRButton = new JRadioButton("Any Search Terms");
-		searchTypePanel.add(anySearchRButton);
+		JRadioButton anySearchButton = new JRadioButton("Any Search Terms");
+		searchTypePanel.add(anySearchButton);
 		
-		JRadioButton exactPhraseRButton = new JRadioButton("Exact Phrase");
-		searchTypePanel.add(exactPhraseRButton);
+		JRadioButton exactPhraseButton = new JRadioButton("Exact Phrase");
+		searchTypePanel.add(exactPhraseButton);
 		
 		
 	}
