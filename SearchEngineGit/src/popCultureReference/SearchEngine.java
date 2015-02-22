@@ -10,18 +10,31 @@ package popCultureReference;/* Search Engine created by Group Pop Culture Refere
  * This version is done completely in Swing 
  * and renamed popCultureReference.SearchEngine.java to differentiate it from the Main
  * in the master branch
- *  
+ *
+ *  Brannon
+ *  Made some action listeners for the file and help menu
+ *  Made it so the radio buttons deselect if you choose a different one
+ *  Made it so that when the Maintenance button is pressed, a new window pops up
+ *  ...
  */
 
 
 import javax.swing.*;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.logging.Handler;
+
 
 
 public class SearchEngine {
 
+
+
 	private JFrame frame;
+
+
 
 	/**
 	 * Launch the application.
@@ -29,6 +42,21 @@ public class SearchEngine {
 	public static void main(String[] args) {
 					SearchEngine window = new SearchEngine();
 					window.frame.setVisible(true);
+	}
+
+	//ActionListeners for drop down menu buttons
+	class MaintenanceGraphical implements ActionListener{public void actionPerformed(ActionEvent e){new MaintenanceGUI();}}
+	class ExitThatBitch implements ActionListener{public void actionPerformed(ActionEvent e){System.exit(0);}}
+	class AboutMenuListener implements ActionListener{public void actionPerformed(ActionEvent e){
+		JOptionPane.showMessageDialog(null, " Created by Jordan Hart, Brannon Centeno, Kish Moore and Alexis Herrera");
+		}
+	}
+
+	class ViewHelpMenuListener implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+
+			JOptionPane.showMessageDialog(null, "Need to create help menu");
+		}
 	}
 
 	/**
@@ -45,6 +73,7 @@ public class SearchEngine {
 		frame = new JFrame();
 		frame.setTitle("Search Engine");
 		frame.setBounds(100, 100, 600, 400);
+		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				
 		/* Menu Bar
@@ -62,10 +91,14 @@ public class SearchEngine {
 		menuBar.add(fileMenu);
 		
 		JMenuItem maintenanceItem = new JMenuItem("Maintenance");
+		maintenanceItem.addActionListener(new MaintenanceGraphical());
 		fileMenu.add(maintenanceItem);
+
 		
 		JMenuItem exitItem = new JMenuItem("Exit");
+		exitItem.addActionListener(new ExitThatBitch());
 		fileMenu.add(exitItem);
+
 
 		
 		/* Help Menu Bar containing View Help and About Menu Options */
@@ -74,9 +107,11 @@ public class SearchEngine {
 		menuBar.add(helpMenu);
 		
 		JMenuItem viewHelpItem = new JMenuItem("View Help");
+		viewHelpItem.addActionListener(new ViewHelpMenuListener());
 		helpMenu.add(viewHelpItem);
 		
 		JMenuItem aboutItem = new JMenuItem("About");
+		aboutItem.addActionListener(new AboutMenuListener());
 		helpMenu.add(aboutItem);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
@@ -111,21 +146,31 @@ public class SearchEngine {
 		/* Low Bar */
 		
 		JPanel searchTypePanel = new JPanel();
-		frame.getContentPane().add(searchTypePanel, BorderLayout.SOUTH);
+
 		
 		JLabel searchTypeLabel = new JLabel("Search Type:");
 		searchTypePanel.add(searchTypeLabel);
 		
-		JRadioButton searchTermRButton = new JRadioButton("All Search Terms");
-		searchTypePanel.add(searchTermRButton);
-		
-		JRadioButton anySearchRButton = new JRadioButton("Any Search Terms");
-		searchTypePanel.add(anySearchRButton);
-		
-		JRadioButton exactPhraseRButton = new JRadioButton("Exact Phrase");
-		searchTypePanel.add(exactPhraseRButton);
-		
-		
+		JRadioButton allSearchTermButton = new JRadioButton();
+		allSearchTermButton.setText("All Search Terms");
+
+		JRadioButton anySearchButton = new JRadioButton();
+		anySearchButton.setText("Any Search Terms");
+
+		JRadioButton exactPhraseButton = new JRadioButton();
+		exactPhraseButton.setText("Exact Phrase");
+		searchTypePanel.add(exactPhraseButton);
+
+		ButtonGroup group = new ButtonGroup();
+		group.add(allSearchTermButton);
+		group.add(anySearchButton);
+		group.add(exactPhraseButton);
+
+		searchTypePanel.add(allSearchTermButton);
+		searchTypePanel.add(anySearchButton);
+		searchTypePanel.add(exactPhraseButton);
+
+		frame.getContentPane().add(searchTypePanel, BorderLayout.SOUTH);
 	}
 
 }
