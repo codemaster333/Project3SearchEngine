@@ -1,4 +1,6 @@
-package popCultureReference;/* Search Engine created by Group Pop Culture Reference
+package popCultureReference;
+
+/* Search Engine created by Group Pop Culture Reference
  *
  * Comprising of Jordan Hart, Brannon Centeno, Kish Moore
  * and Alexis Herrera.
@@ -46,7 +48,7 @@ public class SearchEngine {
 
 	//ActionListeners for drop down menu buttons
 	class MaintenanceGraphical implements ActionListener{public void actionPerformed(ActionEvent e){new MaintenanceGUI();}}
-	class ExitThatBitch implements ActionListener{public void actionPerformed(ActionEvent e){System.exit(0);}}
+	class Exit implements ActionListener{public void actionPerformed(ActionEvent e){System.exit(0);}}
 	class AboutMenuListener implements ActionListener{public void actionPerformed(ActionEvent e){
 		JOptionPane.showMessageDialog(null, " Created by Jordan Hart, Brannon Centeno, Kish Moore and Alexis Herrera");
 		}
@@ -96,7 +98,7 @@ public class SearchEngine {
 
 		
 		JMenuItem exitItem = new JMenuItem("Exit");
-		exitItem.addActionListener(new ExitThatBitch());
+		exitItem.addActionListener(new Exit());
 		fileMenu.add(exitItem);
 
 
