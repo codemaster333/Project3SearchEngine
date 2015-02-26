@@ -225,25 +225,26 @@ public class SearchEngine implements MainWindow {
 	@Override
 	public void allSearchTerms() {
 		// TODO Auto-generated method stub
-		
+		JOptionPane.showMessageDialog(null, " Needs to be implimented");
 	}
 
 	@Override
 	public void anySearchTerms() {
 		// TODO Auto-generated method stub
-		
+		JOptionPane.showMessageDialog(null, " Needs to be implimented");
 	}
 
 	@Override
 	public void exactPhrase() {
 		// TODO Auto-generated method stub
-		
+		JOptionPane.showMessageDialog(null, " Needs to be implimented");
 	}
 
 	@Override
 	public void search(String Terms) {
 		// TODO Auto-generated method stub
-		
+		JOptionPane.showMessageDialog(null, " Needs to be implimented");
+
 	}
 	
 	

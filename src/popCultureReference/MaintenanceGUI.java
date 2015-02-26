@@ -118,7 +118,7 @@ it'd be nicer to add all the components without seeing all that code.
 			{
 			 public void actionPerformed (ActionEvent e)
 			 {
-				 rebuildFile();
+				 removeFile();
 			 }
 			 });
 		}
@@ -126,16 +126,18 @@ it'd be nicer to add all the components without seeing all that code.
 	@Override
 	public void addFile() {
 		// TODO Auto-generated method stub
-		
+		JOptionPane.showMessageDialog(null, " Needs to be implimented");
 	}
 	@Override
 	public void rebuildData() {
 		// TODO Auto-generated method stub
-		
+		JOptionPane.showMessageDialog(null, " Needs to be implimented");
+
 	}
 	@Override
 	public void removeFile() {
 		// TODO Auto-generated method stub
-		
+		JOptionPane.showMessageDialog(null, " Needs to be implimented");
+
 	}
 }
