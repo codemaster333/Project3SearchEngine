@@ -34,9 +34,9 @@ it'd be nicer to add all the components without seeing all that code.
 	private void initialize(){
 		//table data initialization 
 		
-		String[] columnNames = {"File Name", "Status"};
+		String[] columnNames = {"1","2"};
 		
-		Object[][] data = {{"Foo", "Test"}};
+		Object[][] data = {{"File Name", "Status"}};
 		
 		//actual window code
 		frame = new JFrame();
