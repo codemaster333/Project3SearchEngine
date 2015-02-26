@@ -32,10 +32,17 @@ it'd be nicer to add all the components without seeing all that code.
 		}
 	}
 	private void initialize(){
+		//table data initialization 
+		
+		String[] columnNames = {"File Name", "Status"};
+		
+		Object[][] data = {{"Foo", "Test"}};
+		
+		//actual window code
 		frame = new JFrame();
 		frame.setTitle("Maintenance");
 		frame.setBounds(100, 100, 600, 400);
-		frame.setResizable(false);
+		//frame.setResizable(false);
 		JMenuBar maintBar = new JMenuBar();
 		frame.setJMenuBar(maintBar);
 		JMenu maintFile = new JMenu("File");
@@ -60,15 +67,15 @@ it'd be nicer to add all the components without seeing all that code.
 		 top.add(searchMaintence);
 		 top.setLayout(new FlowLayout());
 		 JPanel flowCenter = new JPanel();
-		 frame.add(flowCenter, BorderLayout.CENTER);
+		 frame.add(flowCenter, BorderLayout.SOUTH);
 		 JButton addFile = new JButton("Add file");
 		 flowCenter.add(addFile);
 		 JButton rebuild = new JButton("Rebuild Out of date");
 		 flowCenter.add(rebuild);
 		 JButton remove = new JButton("Remove Selected Files");
 		 flowCenter.add(remove);
-		// JTable maint = new JTable( ); //Find better way to increase size then adding more rows and columns
-		// top.add(maint, BorderLayout.SOUTH);
+		 JTable maint = new JTable(data, columnNames);	
+		 frame.add(maint, BorderLayout.CENTER);
 		
 		
 		
