@@ -11,7 +11,23 @@ import popCultureReference.SearchEngine.Exit;
  * Created by brannon on 2/21/15.
  * Edited/added by Jordan on 2/26/15
  */
-public class MaintenanceGUI {
+
+
+
+interface MaintanceInterface {
+
+	  
+    void addFile();
+
+    void rebuildData();
+
+    void removeFile();
+
+}
+
+
+
+public class MaintenanceGUI implements MaintanceInterface {
 	private JFrame frame;
 	/*
 Put the GUI components of the maintenance window here.
@@ -34,9 +50,9 @@ it'd be nicer to add all the components without seeing all that code.
 	private void initialize(){
 		//table data initialization 
 		
-		String[] columnNames = {"File Name", "Status"};
+		String[] columnNames = {"1","2"};
 		
-		Object[][] data = {{"Foo", "Test"}};
+		Object[][] data = {{"File Name", "Status"}};
 		
 		//actual window code
 		frame = new JFrame();
@@ -80,5 +96,48 @@ it'd be nicer to add all the components without seeing all that code.
 		
 		
 		 frame.setVisible(true);
+		 
+		 addFile.addActionListener( new ActionListener()
+			{
+			 public void actionPerformed (ActionEvent e)
+			 {
+				 addFile();
+			 }
+			 });
+		 
+		 
+		 rebuild.addActionListener( new ActionListener()
+			{
+			 public void actionPerformed (ActionEvent e)
+			 {
+				 rebuildData();
+			 }
+			 });
+		 
+		 remove.addActionListener( new ActionListener()
+			{
+			 public void actionPerformed (ActionEvent e)
+			 {
+				 removeFile();
+			 }
+			 });
+		}
+	
+	@Override
+	public void addFile() {
+		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, " Needs to be implimented");
+	}
+	@Override
+	public void rebuildData() {
+		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, " Needs to be implimented");
+
+	}
+	@Override
+	public void removeFile() {
+		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, " Needs to be implimented");
+
 	}
 }
