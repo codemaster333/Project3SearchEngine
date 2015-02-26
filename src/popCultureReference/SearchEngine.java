@@ -28,9 +28,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Handler;
 
+interface MainWindow {
+
+  
+    void allSearchTerms();
+
+    void anySearchTerms();
+
+    void exactPhrase();
+
+    void search(String Terms);
+}
 
 
-public class SearchEngine {
+public class SearchEngine implements MainWindow {
 
 
 
@@ -60,6 +71,8 @@ public class SearchEngine {
 			JOptionPane.showMessageDialog(null, "Need to create help menu");
 		}
 	}
+	
+	
 
 	/**
 	 * Create the application.
@@ -119,6 +132,7 @@ public class SearchEngine {
 		
 		/* Search Results Panel */
 		
+		
 		JPanel resultPanel = new JPanel();
 		frame.getContentPane().add(resultPanel);
 			
@@ -173,6 +187,65 @@ public class SearchEngine {
 		searchTypePanel.add(exactPhraseButton);
 
 		frame.getContentPane().add(searchTypePanel, BorderLayout.SOUTH);
+		
+		allSearchTermButton.addActionListener( new ActionListener()
+		{
+		 public void actionPerformed (ActionEvent e)
+		 {
+			 allSearchTerms();
+		 }
+		 }); 
+		
+		anySearchButton.addActionListener( new ActionListener()
+		{
+		 public void actionPerformed (ActionEvent e)
+		 {
+			 anySearchTerms();
+		 }
+		 }); 
+		
+		exactPhraseButton.addActionListener( new ActionListener()
+		{
+		 public void actionPerformed (ActionEvent e)
+		 {
+			 exactPhrase();
+		 }
+		 }); 
+		
+		searchButton.addActionListener( new ActionListener()
+		{
+		 public void actionPerformed (ActionEvent e)
+		 {
+			 String search = "Search string from field when implimented";
+			 search(search);
+		 }
+		 });
 	}
+
+	@Override
+	public void allSearchTerms() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void anySearchTerms() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void exactPhrase() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void search(String Terms) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 
 }
