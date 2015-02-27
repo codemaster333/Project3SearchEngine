@@ -121,9 +121,7 @@ public class SearchEngine implements MainWindow {
 		JMenu helpMenu = new JMenu("Help");
 		menuBar.add(helpMenu);
 		
-		JMenuItem viewHelpItem = new JMenuItem("View Help");
-		viewHelpItem.addActionListener(new ViewHelpMenuListener());
-		helpMenu.add(viewHelpItem);
+		
 		
 		JMenuItem aboutItem = new JMenuItem("About");
 		aboutItem.addActionListener(new AboutMenuListener());
