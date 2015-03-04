@@ -3,8 +3,12 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import popCultureReference.SearchEngine.Exit;
 /**
@@ -126,15 +130,62 @@ it'd be nicer to add all the components without seeing all that code.
 	@Override
 	public void addFile() {
 		// TODO Auto-generated method stub
-	}
-	@Override
-	public void rebuildData() {
-		// TODO Auto-generated method stub
+      addFileReader();
 
-	}
-	@Override
-	public void removeFile() {
-		// TODO Auto-generated method stub
 
-	}
+
+   }
+   @Override
+   public void rebuildData() {
+      // TODO Auto-generated method stub
+
+   }
+   @Override
+   public void removeFile() {
+      // TODO Auto-generated method stub
+
+   }
+
+   public void addFileReader(){
+      StringBuilder sb = new StringBuilder();
+      FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files Only", "txt");
+      JFileChooser fileChooser = new JFileChooser();
+      fileChooser.setFileFilter(filter);
+      if(fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
+
+        //get the file
+         File file = fileChooser.getSelectedFile();
+
+         //create a scanner for the file
+         //IO Exception handled in method declaration
+         try{
+            Scanner input = new Scanner(file);
+            //read text from file
+            while(input.hasNext()){
+               sb.append(input.nextLine());
+               sb.append("\n");
+            }
+
+            input.close();
+
+
+         }catch(Exception e){
+            System.out.println("Error");
+         }
+
+
+
+
+
+      }
+      else{
+         sb.append("No file was selected");
+      }
+
+      System.out.println(sb);
+
+
+
+   }
 }
+
