@@ -214,7 +214,7 @@ public class SearchEngine implements MainWindow {
 		{
 		 public void actionPerformed (ActionEvent e)
 		 {
-			 String search = "Search string from field when implimented";
+			 String search = "Search string from field when implemented";
 			 search(search);
 		 }
 		 });

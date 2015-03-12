@@ -40,6 +40,7 @@ it'd be nicer to add all the components without seeing all that code.
 	 */
 	MaintenanceGUI(){
 		initialize();
+
 	}
 	/* Action Listeners */
 	class AboutMenuListener implements ActionListener{public void actionPerformed(ActionEvent e){
@@ -130,7 +131,8 @@ it'd be nicer to add all the components without seeing all that code.
 	@Override
 	public void addFile() {
 		// TODO Auto-generated method stub
-      addFileReader();
+		//Activate filehandling!
+      FileHandling fileReader = new FileHandling();
 
 
 
@@ -146,46 +148,6 @@ it'd be nicer to add all the components without seeing all that code.
 
    }
 
-   public void addFileReader(){
-      StringBuilder sb = new StringBuilder();
-      FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files Only", "txt");
-      JFileChooser fileChooser = new JFileChooser();
-      fileChooser.setFileFilter(filter);
-      if(fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
 
-        //get the file
-         File file = fileChooser.getSelectedFile();
-
-         //create a scanner for the file
-         //IO Exception handled in method declaration
-         try{
-            Scanner input = new Scanner(file);
-            //read text from file
-            while(input.hasNext()){
-               sb.append(input.nextLine());
-               sb.append("\n");
-            }
-
-            input.close();
-
-
-         }catch(Exception e){
-            System.out.println("Error");
-         }
-
-
-
-
-
-      }
-      else{
-         sb.append("No file was selected");
-      }
-
-      System.out.println(sb);
-
-
-
-   }
 }
 
