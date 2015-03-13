@@ -80,6 +80,8 @@ it'd be nicer to add all the components without seeing all that code.
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		
+		
+		// Operations for file handling
 		frame.setLayout( new BorderLayout() );
 		 JPanel top = new JPanel();
 		 //add panel to north of layout
@@ -130,9 +132,18 @@ it'd be nicer to add all the components without seeing all that code.
 	
 	@Override
 	public void addFile() {
-		// TODO Auto-generated method stub
-		//Activate filehandling!
-      FileHandling fileReader = new FileHandling();
+      
+      
+      // File chooser default code
+      JFileChooser chooser = new JFileChooser();
+      FileNameExtensionFilter filter = new FileNameExtensionFilter(
+          "Text Files", "txt");
+      chooser.setFileFilter(filter);
+      int returnVal = chooser.showOpenDialog(parent);
+      if(returnVal == JFileChooser.APPROVE_OPTION) {
+         System.out.println("You chose this file: " +
+              chooser.getSelectedFile().getName());
+      }
 
 
 
@@ -150,4 +161,3 @@ it'd be nicer to add all the components without seeing all that code.
 
 
 }
-
