@@ -11,18 +11,15 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JFileChooser;
 
-import popCultureReference.SearchEngine.Exit;
-/**
- * Created by brannon on 2/21/15.
- * Edited/added by Jordan on 2/26/15
- */
+import javax.swing.table.DefaultTableModel;
+
 
 
 
 interface MaintanceInterface {
 
 	  
-    void addFile();
+    void addFile(DefaultTableModel foo);
 
     void rebuildData();
 
@@ -98,7 +95,11 @@ it'd be nicer to add all the components without seeing all that code.
 		 flowCenter.add(rebuild);
 		 JButton remove = new JButton("Remove Selected Files");
 		 flowCenter.add(remove);
-		 JTable maint = new JTable(data, columnNames);	
+		 JTable maint = new JTable();
+		 //Use the DefaultTableModel to make editing table easy
+		 DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
+		 maint.setModel(tableModel);
+		 
 		 frame.add(maint, BorderLayout.CENTER);
 		
 		
@@ -109,7 +110,7 @@ it'd be nicer to add all the components without seeing all that code.
 			{
 			 public void actionPerformed (ActionEvent e)
 			 {
-				 addFile();
+				 addFile(tableModel);
 				
 			 }
 			 });
@@ -133,7 +134,7 @@ it'd be nicer to add all the components without seeing all that code.
 		}
 	
 	@Override
-	public void addFile() {
+	public void addFile(DefaultTableModel tableModel) {
       
 		
 		//JFileChooser brings up the dialog box and only filters text files
@@ -143,9 +144,9 @@ it'd be nicer to add all the components without seeing all that code.
       chooser.setFileFilter(filter);
       if(chooser.showOpenDialog(null)  == JFileChooser.APPROVE_OPTION) {
     	  File chosenFile = chooser.getSelectedFile();
-    	  // Test print out as it just shows it in the console!
-         System.out.println(chosenFile.getAbsolutePath());
-         
+    	      	  // Test print out as it just shows it in the console!
+    	  Object[] newRowData = {chosenFile.getName(), chosenFile.getPath()}; //Store data in format that can be passed into tableModel
+    	  tableModel.addRow(newRowData); // adds the data to table
          
       }
 
