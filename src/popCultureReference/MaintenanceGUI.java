@@ -141,8 +141,7 @@ it'd be nicer to add all the components without seeing all that code.
       FileNameExtensionFilter filter = new FileNameExtensionFilter(
           "Text Files", "txt");
       chooser.setFileFilter(filter);
-      int chosen = chooser.showOpenDialog(null);
-      if(chosen  == JFileChooser.APPROVE_OPTION) {
+      if(chooser.showOpenDialog(null)  == JFileChooser.APPROVE_OPTION) {
     	  File chosenFile = chooser.getSelectedFile();
     	  // Test print out as it just shows it in the console!
          System.out.println(chosenFile.getAbsolutePath());
