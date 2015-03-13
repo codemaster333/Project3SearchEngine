@@ -144,7 +144,6 @@ it'd be nicer to add all the components without seeing all that code.
       chooser.setFileFilter(filter);
       if(chooser.showOpenDialog(null)  == JFileChooser.APPROVE_OPTION) {
     	  File chosenFile = chooser.getSelectedFile();
-    	      	  // Test print out as it just shows it in the console!
     	  Object[] newRowData = {chosenFile.getName(), chosenFile.getPath()}; //Store data in format that can be passed into tableModel
     	  tableModel.addRow(newRowData); // adds the data to table
          
