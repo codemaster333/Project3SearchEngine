@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.JFileChooser;
 
 import popCultureReference.SearchEngine.Exit;
 /**
@@ -109,6 +110,7 @@ it'd be nicer to add all the components without seeing all that code.
 			 public void actionPerformed (ActionEvent e)
 			 {
 				 addFile();
+				
 			 }
 			 });
 		 
@@ -133,16 +135,19 @@ it'd be nicer to add all the components without seeing all that code.
 	@Override
 	public void addFile() {
       
-      
-      // File chooser default code
+		
+		//JFileChooser brings up the dialog box and only filters text files
       JFileChooser chooser = new JFileChooser();
       FileNameExtensionFilter filter = new FileNameExtensionFilter(
           "Text Files", "txt");
       chooser.setFileFilter(filter);
-      int returnVal = chooser.showOpenDialog(parent);
-      if(returnVal == JFileChooser.APPROVE_OPTION) {
-         System.out.println("You chose this file: " +
-              chooser.getSelectedFile().getName());
+      int chosen = chooser.showOpenDialog(null);
+      if(chosen  == JFileChooser.APPROVE_OPTION) {
+    	  File chosenFile = chooser.getSelectedFile();
+    	  // Test print out as it just shows it in the console!
+         System.out.println(chosenFile.getAbsolutePath());
+         
+         
       }
 
 
