@@ -161,10 +161,17 @@ it'd be nicer to add all the components without seeing all that code.
          try{
             Scanner input = new Scanner(file);
             //read text from file
+            //record text in index
+            int position = 0;
+            String word = "CurrentWord";
+            writeFile ( word, position );
             while(input.hasNext()){
-               sb.append(input.nextLine());
-               sb.append("\n");
+/* Suggest changing this to word by word because we need to record the words for the index.              sb.append(input.nextLine()); */
+            word = input.next();
+            writeFile ( word, position );
+            position ++;
             }
+               sb.append("\n");
 
             input.close();
 
@@ -183,9 +190,17 @@ it'd be nicer to add all the components without seeing all that code.
       }
 
       System.out.println(sb);
+      
 
 
 
    }
 }
 
+public static void writeFile ( String word, int position )
+{
+	// Sort the new word relative to the words already in the file; if it's exactly the same as one, 
+	// record its new position after those instances of the word as given at
+	// http://wpollock.com/AJava/Proj-B-SearchEngine-UI.htm . If it's new, record it in its proper
+	// alphabetic position.
+}
