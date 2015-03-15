@@ -1,0 +1,23 @@
+   public static void readFile ( String fileName )
+   // The file should probably be named something straighforward, like "Save file."
+   
+   {
+      Scanner in = new Scanner( System.in );
+	  String word = "CurrentWord";
+	  int position = 0;
+	  while ( in.hasNext() )
+	  {
+      word = in.next();
+      writeFile ( word, position );
+      position ++;
+      
+      // This will read each word from the file being indexed in order, and execute the WriteFile method on each of them. It will stop when it has nothing to read.
+	  }
+   }
+}
+public static void writeFile ( String word, int position )
+   {
+      // Sort the new word relative to the words already in the file; if it's exactly the same as one, 
+      // record its new position after those instances of the word as given at http://wpollock.com/AJava/Proj-B-SearchEngine-UI.htm .
+      // If it's new, record it in its proper alphabetic position.
+   }
