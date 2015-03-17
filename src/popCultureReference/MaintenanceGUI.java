@@ -5,6 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.*;
@@ -30,6 +33,10 @@ interface MaintanceInterface {
 
 
 public class MaintenanceGUI implements MaintanceInterface {
+
+   private ArrayList<File> awe = new ArrayList<File>();
+   private int i = 0;
+
 	private JFrame frame;
 	/*
 Put the GUI components of the maintenance window here.
@@ -97,7 +104,7 @@ it'd be nicer to add all the components without seeing all that code.
 		 flowCenter.add(remove);
 		 JTable maint = new JTable();
 		 //Use the DefaultTableModel to make editing table easy
-		 DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
+		 final DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
 		 maint.setModel(tableModel);
 		 
 		 frame.add(maint, BorderLayout.CENTER);
@@ -135,18 +142,23 @@ it'd be nicer to add all the components without seeing all that code.
 	
 	@Override
 	public void addFile(DefaultTableModel tableModel) {
-      
-		
+
+
+
 		//JFileChooser brings up the dialog box and only filters text files
       JFileChooser chooser = new JFileChooser();
       FileNameExtensionFilter filter = new FileNameExtensionFilter(
           "Text Files", "txt");
       chooser.setFileFilter(filter);
       if(chooser.showOpenDialog(null)  == JFileChooser.APPROVE_OPTION) {
-    	  File chosenFile = chooser.getSelectedFile();
-    	  Object[] newRowData = {chosenFile.getName(), chosenFile.getPath()}; //Store data in format that can be passed into tableModel
-    	  tableModel.addRow(newRowData); // adds the data to table
-         
+         File theChosenOne = chooser.getSelectedFile();
+    	  Object[] newRowData = {theChosenOne.getName(), theChosenOne.getAbsolutePath()}; //Store data in format that can be passed into tableModel
+    	  tableModel.addRow(newRowData);
+    	   // adds the data to table
+         this.awe.add(i, theChosenOne);
+         this.i++;
+         //Prints out contents of the arrayList (debugging)
+         System.out.println(this.awe);
       }
 
 
