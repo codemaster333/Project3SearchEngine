@@ -4,18 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.Scanner;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -30,9 +27,9 @@ interface MaintanceInterface {
 
 	void removeFile();
 	
-	String readFile();
+	String readIndex();
 	
-	void writeFile(String name, String path); 
+	void writeIndex(String name, String path); 
 	
 }
 
@@ -146,7 +143,7 @@ public class MaintenanceGUI extends AbstractTableModel implements MaintanceInter
 																					// passed
 																					// into
 																					// tableModel
-			writeFile(chosenFile.getName(), chosenFile.getPath());
+			writeIndex(chosenFile.getName(), chosenFile.getPath());
 			tableModel.addRow(newRowData); // adds the data to table
 		}
 	}
@@ -178,37 +175,67 @@ return 0;	}
 		return null;
 	}  // use abstract table model for index
 	
-	public void readFile(String filename){
-		
-	}
-public void writeFile( String name, String path){	
-	String data = name + ',' + path;
-	File SearchEngineData = new File("SearchEngineData.txt"); // creates text file in project folder
+
+public void writeIndex( String name, String path){	
 	try{
 		
-		SearchEngineData.createNewFile(); //Someone needs to impliment the write functionality and read
 		
+	 // Old way to write files using streams
+		//Write to file
 		
+		FileOutputStream fileStream = new FileOutputStream( "SearchEngineData.txt");
+		OutputStreamWriter outWrite = new OutputStreamWriter (fileStream, "UTF8"); 
 		
+		String data = readIndex() + name + ',' + path + ','; // , is delimiter 
+
+		outWrite.write(data);
+		outWrite.close(); //closes stream
+		
+	
 			}
 			
 			
  catch (FileNotFoundException e) {
-	 	writeFile(name, path);
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
+			e.printStackTrace(); 
+		}  catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 @Override
-public String readFile() {
-	// TODO Auto-generated method stub
-	return null;
+public String readIndex() {
+	final int MAX =99;
+	int EOF = -1;
+	StringBuilder sb = new StringBuilder( MAX);
+	
+	try
+	{
+		FileInputStream fis = new FileInputStream("SearchEngineData.txt");
+		InputStreamReader isr = new InputStreamReader(fis, "UTF8");
+		
+		int ableRead;
+		while ((ableRead = isr.read()) != EOF){
+			sb.append(ableRead);
+		if (sb.length() >= MAX)
+			break;
+		}
+		isr.close();
+	}
+	
+	catch( IOException e)
+	{
+		System.err.println(e);
+	}
+
+
+	return sb.toString();  // sb is still "" for some reason. Possibly not going through while loop	
+	
 }
+
+
 
 
 
