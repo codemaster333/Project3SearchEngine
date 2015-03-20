@@ -128,6 +128,8 @@ public class MaintenanceGUI implements MaintanceInterface {
 
 		FileCreator fc = new FileCreator();
 		JFileChooser chooser = new JFileChooser();
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files Only", "txt");
+		chooser.setFileFilter(filter);
 		if(chooser.showOpenDialog(null)==JFileChooser.APPROVE_OPTION){
 
 			File chosenFile = chooser.getSelectedFile();
