@@ -19,7 +19,7 @@ public class FileCreator {
     public void FileWriterAwesome(File myFile) throws IOException {
         StringBuilder sb = new StringBuilder();
         sb.append(myFile.getName()+"\n"+myFile.getAbsolutePath());
-        File temp = new File("./File Reference Directory/"+myFile.getName());
+        File temp = new File("./File Reference Directory/"+myFile.getName()+" Reference");
         FileWriter writer = new FileWriter(temp, true);
         writer.write(sb.toString());
         writer.flush();
