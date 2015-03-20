@@ -43,11 +43,7 @@ interface MainWindow {
 
 public class SearchEngine implements MainWindow {
 
-
-
 	private JFrame frame;
-
-
 
 	/**
 	 * Launch the application.
@@ -106,6 +102,7 @@ public class SearchEngine implements MainWindow {
 		menuBar.add(fileMenu);
 		
 		JMenuItem maintenanceItem = new JMenuItem("Maintenance");
+		//ActionListener to activate Maintenance
 		maintenanceItem.addActionListener(new MaintenanceGraphical());
 		fileMenu.add(maintenanceItem);
 
