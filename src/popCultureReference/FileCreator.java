@@ -19,7 +19,8 @@ public class FileCreator {
 
     /*
     Creates a file in the "File Reference Directory" folder
-    In the newly created file, the 1st line has the referenced file's name and the 2nd line its absolute path. 3rd line last mod time
+    Writes the path name of the selected file to the created .txt
+    Every time a new file is selected it adds a new path name
      */
     public void FileWriterAwesome(File myFile) throws IOException {
         StringBuilder sb = new StringBuilder();
@@ -31,6 +32,11 @@ public class FileCreator {
 
     }
 
+    /*
+    Reads the reference text
+    Takes the path names line by line in the reference text and puts it into a String array
+    Then it takes the path names and converts them into File references and places them into a file array
+     */
     public ArrayList<File> ArrayListCreator() throws IOException, FileNotFoundException {
 
         BufferedReader in = new BufferedReader(new FileReader("./File Reference Directory/File Reference.txt"));

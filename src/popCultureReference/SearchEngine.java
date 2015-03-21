@@ -58,7 +58,12 @@ public class SearchEngine implements MainWindow {
 	public static void main(String[] args) throws IOException {
 		SearchEngine window = new SearchEngine();
 		FileCreator fc = new FileCreator();
-		//Still working on this code. Hopefully you can see what I'm trying to do.
+
+		/*
+		Makes itTastesLikeKevinBacon equal to the File arraylist created in FileCreator.ArrayListCreator
+		The if statement is to handle the initial program startup where our File Reference.txt hasn't been created yet
+
+		 */
 		ArrayList<File> itTastesLikeKevinBacon = new ArrayList<File>();
 		File f = new File("./File Reference Directory/File Reference.txt");
 		if(f.exists()) {
