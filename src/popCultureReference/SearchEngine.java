@@ -26,7 +26,10 @@ import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.logging.Handler;
+import java.util.Scanner;
 
 interface MainWindow {
 
@@ -43,13 +46,19 @@ interface MainWindow {
 
 public class SearchEngine implements MainWindow {
 
+
 	private JFrame frame;
+	ArrayList<String> itTastesLikeKevinBacon = new ArrayList<String>();
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-					SearchEngine window = new SearchEngine();
+		SearchEngine window = new SearchEngine();
+		FileCreator fc = new FileCreator();
+		this.itTastesLikeKevinBacon = fc.crapTastic();
+
+
 					window.frame.setVisible(true);
 	}
 
