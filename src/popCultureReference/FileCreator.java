@@ -31,19 +31,28 @@ public class FileCreator {
 
     }
 
-    public ArrayList<String> crapTastic() throws IOException {
+    public ArrayList<File> ArrayListCreator() throws IOException {
 
         BufferedReader in = new BufferedReader(new FileReader("./File Reference Directory/File Reference.txt"));
         String str;
 
         ArrayList<String> list = new ArrayList<String>();
+        ArrayList<File> fileList = new ArrayList<File>();
         while((str = in.readLine()) !=null){
             list.add(str);
 
-            return list;
         }
 
-        return list;
+        for(String x: list){
+            String poop[] = (String[]) list.toArray();
+            int iterate = 0;
+            File buttMunch = new File(poop[iterate]);
+            fileList.add(iterate, buttMunch);
+            iterate++;
+
+        }
+
+        return fileList;
     }
 
 }

@@ -26,6 +26,8 @@ import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.logging.Handler;
@@ -48,16 +50,17 @@ public class SearchEngine implements MainWindow {
 
 
 	private JFrame frame;
-	ArrayList<String> itTastesLikeKevinBacon = new ArrayList<String>();
+
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		SearchEngine window = new SearchEngine();
 		FileCreator fc = new FileCreator();
 		//Still working on this code. Hopefully you can see what I'm trying to do.
-		//this.itTastesLikeKevinBacon = fc.crapTastic();
+		ArrayList<File> itTastesLikeKevinBacon = new ArrayList<File>();
+		itTastesLikeKevinBacon = fc.ArrayListCreator();
 
 
 					window.frame.setVisible(true);
