@@ -31,7 +31,7 @@ public class FileCreator {
 
     }
 
-    public ArrayList<File> ArrayListCreator() throws IOException {
+    public ArrayList<File> ArrayListCreator() throws IOException, FileNotFoundException {
 
         BufferedReader in = new BufferedReader(new FileReader("./File Reference Directory/File Reference.txt"));
         String str;

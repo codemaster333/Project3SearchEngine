@@ -60,7 +60,10 @@ public class SearchEngine implements MainWindow {
 		FileCreator fc = new FileCreator();
 		//Still working on this code. Hopefully you can see what I'm trying to do.
 		ArrayList<File> itTastesLikeKevinBacon = new ArrayList<File>();
-		itTastesLikeKevinBacon = fc.ArrayListCreator();
+		File f = new File("./File Reference Directory/File Reference.txt");
+		if(f.exists()) {
+			itTastesLikeKevinBacon = fc.ArrayListCreator();
+		}
 
 
 					window.frame.setVisible(true);
