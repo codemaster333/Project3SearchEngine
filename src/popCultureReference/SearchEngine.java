@@ -56,7 +56,8 @@ public class SearchEngine implements MainWindow {
 	public static void main(String[] args) {
 		SearchEngine window = new SearchEngine();
 		FileCreator fc = new FileCreator();
-		this.itTastesLikeKevinBacon = fc.crapTastic();
+		//Still working on this code. Hopefully you can see what I'm trying to do.
+		//this.itTastesLikeKevinBacon = fc.crapTastic();
 
 
 					window.frame.setVisible(true);
