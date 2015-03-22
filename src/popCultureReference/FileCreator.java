@@ -47,7 +47,6 @@ public class FileCreator {
         }
 
 
-
         for(String x: list){
             int iterate = 0;
             File buttMunch = new File(x);
@@ -89,9 +88,7 @@ public class FileCreator {
                 sb.append( ls );
             }
 
-
             hm.put(x.getName(), wordSeparator(sb.toString()));
-
 
         }
 

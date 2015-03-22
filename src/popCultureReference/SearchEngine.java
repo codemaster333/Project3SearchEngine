@@ -52,7 +52,7 @@ public class SearchEngine implements MainWindow {
 
 
 
-	private static HashMap<String, String> hm = new HashMap<>();
+
 
 	private JFrame frame;
 
@@ -62,12 +62,16 @@ public class SearchEngine implements MainWindow {
 	 */
 	public static void main(String[] args) throws IOException {
 
-		Path path = Paths.get("./File Reference Directory/File Reference.txt");
-		if(!Files.exists(path)){
+		/*
+		This code checks if "./File Reference Directory/File Reference.txt" exists
+		If it doesn't, it creates it.
+		 */
+		if(Files.notExists(Paths.get("./File Reference Directory/File Reference.txt"))){
+			new File("./File Reference Directory").mkdir();
 			File temp = new File("./File Reference Directory/File Reference.txt");
 			FileWriter writer = new FileWriter(temp, true);
 		}
-
+		HashMap<String, String> hm;
 		SearchEngine window = new SearchEngine();
 		FileCreator fc = new FileCreator();
 		/*
