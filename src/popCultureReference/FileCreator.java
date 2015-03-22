@@ -46,13 +46,11 @@ public class FileCreator {
             list.add(str);
         }
 
-
         for(String x: list){
             int iterate = 0;
             File buttMunch = new File(x);
             fileList.add(iterate, buttMunch);
             iterate++;
-
         }
 
         return fileList;
