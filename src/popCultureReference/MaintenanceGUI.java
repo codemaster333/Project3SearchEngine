@@ -71,7 +71,8 @@ public class MaintenanceGUI implements MaintanceInterface {
 		JPanel top = new JPanel();
 		//JList list = new JList(readContent.toArray());
 		JList list = new JList(model);
-model.addElement("hi"); //This is how you add stuff to JList. Remove is
+		String foo[] = {"foo"};
+		model.addElement(foo[0]); //This is how you add stuff to JList. Remove is
 						//model.removeElementAt(model.getSize() - 1);
 		
 		JScrollPane listScroller = new JScrollPane(list);
