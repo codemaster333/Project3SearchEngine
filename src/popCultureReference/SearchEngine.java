@@ -27,7 +27,11 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.logging.Handler;
 
@@ -46,8 +50,9 @@ interface MainWindow {
 
 public class SearchEngine implements MainWindow {
 
-	private static HashMap<String, String> hm = new HashMap<>();
 
+
+	private static HashMap<String, String> hm = new HashMap<>();
 
 	private JFrame frame;
 
@@ -56,21 +61,24 @@ public class SearchEngine implements MainWindow {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) throws IOException {
+
+		Path path = Paths.get("./File Reference Directory/File Reference.txt");
+		if(!Files.exists(path)){
+			File temp = new File("./File Reference Directory/File Reference.txt");
+			FileWriter writer = new FileWriter(temp, true);
+		}
+
 		SearchEngine window = new SearchEngine();
 		FileCreator fc = new FileCreator();
-
 		/*
 		Makes itTastesLikeKevinBacon equal to the File arraylist created in FileCreator.ArrayListCreator
 		The if statement is to handle the initial program startup where our File Reference.txt hasn't been created yet
-
 		 */
 		ArrayList<File> itTastesLikeKevinBacon;
-		File f = new File("./File Reference Directory/File Reference.txt");
+		//File f = new File("./File Reference Directory/File Reference.txt");
 			itTastesLikeKevinBacon = fc.ArrayListCreator();
-
 		hm = fc.HashMapper(itTastesLikeKevinBacon);
-
-
+		System.out.println(hm);
 
 
 

@@ -1,14 +1,16 @@
 package popCultureReference;
+import com.sun.scenario.animation.shared.FiniteClipEnvelope;
 import com.sun.tools.doclets.internal.toolkit.util.DocFinder;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 import javax.swing.*;
@@ -36,20 +38,21 @@ interface MaintanceInterface {
 public class MaintenanceGUI implements MaintanceInterface {
 
 	private JFrame frame;
-	private JList list;
 	private ArrayList<File> readContent = new ArrayList<File>();
 	private int index = 0;
+	private JList list;
+	private static String [] namer;
+	JTable jt;
 
 	MaintenanceGUI(){
 		System.out.println("Maintenance Initialized");
-
-		initialize();
+		try {initialize();} catch (IOException e) {e.printStackTrace();}
 	}
 
 
 
 
-	private void initialize(){
+	private void initialize() throws IOException {
 		//table data initialization
 		frame = new JFrame();
 		frame.setTitle("Maintenance");
@@ -60,31 +63,20 @@ public class MaintenanceGUI implements MaintanceInterface {
 		frame.setResizable(false);
 		frame.setLayout(new BorderLayout());
 
-		JPanel center = new JPanel();
-		/*list = new JList();
-		list.setVisibleRowCount(4);
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		add(new JScrollPane(list));
 
-		list.addListSelectionListener(
+/*
+		FileCreator fc1 = new FileCreator();
+		ArrayList<File> data = fc1.ArrayListCreator();
 
-				new ListSelectionListener(){
+		int iterator = 0;
 
-					public void valueChanged(ListSelectionEvent e) {
-
-						getContentPane().setBackground(colors[list.getSelectedIndex()]);
-
-					}
-
-
-				}
-
-		);*/
-
-
-
-
-
+		for(File x: data){
+			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+			File file = data.get(iterator);
+			this.namer[iterator] = file.getName() + " " + file.getAbsolutePath()+ " " + sdf.format(file.lastModified());
+			iterator++;
+		}
+		*/
 
 
 			//South Buttons
@@ -119,13 +111,26 @@ public class MaintenanceGUI implements MaintanceInterface {
 			}
 		});
 
-
-
 		}
-	
+
+
+	/*
+	Is called when the "Add File" button is clicked
+	A new instance of FileCreator is created
+	A file chooser that only allows for the selection of .txt files is brought up
+	The selected file is then passed into the method "FileWriterAwesome" which is located in the FileCreator class
+
+	What FileWriterAwesome does:
+	Creates a file in the "File Reference Directory" folder
+    Writes the path name of the selected file to the created .txt
+    Every time a new file is selected it adds a new path name
+
+	 */
 	@Override
 	public void addFile(){
+		/*
 
+		 */
 		FileCreator fc = new FileCreator();
 		JFileChooser chooser = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files Only", "txt");
@@ -133,19 +138,10 @@ public class MaintenanceGUI implements MaintanceInterface {
 		if(chooser.showOpenDialog(null)==JFileChooser.APPROVE_OPTION){
 
 			File chosenFile = chooser.getSelectedFile();
-			try {
-				fc.FileWriterAwesome(chosenFile);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-
+			try {fc.FileWriterAwesome(chosenFile);} catch (IOException e) {e.printStackTrace();}
 		}
-
-
-
-
    }
+
    @Override
    public void rebuildData() {
       // TODO Auto-generated method stub
@@ -156,6 +152,14 @@ public class MaintenanceGUI implements MaintanceInterface {
       // TODO Auto-generated method stub
 
    }
+
+	public void myJTable(){
+
+
+
+	}
+
+
 
 
 

@@ -13,9 +13,7 @@ import java.util.Scanner;
 public class FileCreator {
 
     FileCreator(){
-
         System.out.println("File Creator Initialized");
-
     }
 
     /*
@@ -30,7 +28,6 @@ public class FileCreator {
         FileWriter writer = new FileWriter(temp, true);
         writer.write(sb.toString()+"\n");
         writer.flush();
-
     }
 
     /*
@@ -62,12 +59,26 @@ public class FileCreator {
         return fileList;
     }
 
+    /*
+    This methods takes in an arraylist of type File.
+    It then creates a HashMap whose key is of type String and value of type String
+    An enhanced for-loop is used to  iterate through the ArrayList<File> fileArrayList
+    Each index of fileArrayList is stored in File x, read into BufferedReader reader,
+    and then appended to StringBuilder sb.
+
+    Finally, the File name (x.getName();) is stored as the HashMap HashMapper's
+    key and its value as the strings stored in StringBuilder sb stored with one word per a line
+
+     Method wordSeparator used in wordSeparator(sb.toString()); returns a string that has only one
+     word per a line
+
+     hm.put inserts the key and value at that key into our HashMap
+
+     */
     public HashMap HashMapper(ArrayList<File> fileArrayList) throws IOException {
         HashMap<String, String> hm = new HashMap<>();
 
         for (File x : fileArrayList) {
-
-            File temp = x;
             BufferedReader reader = new BufferedReader( new FileReader (x));
             String         line = null;
             StringBuilder  sb = new StringBuilder();
@@ -80,13 +91,15 @@ public class FileCreator {
 
 
             hm.put(x.getName(), wordSeparator(sb.toString()));
-           // System.out.println(wordSeparator(sb.toString()));
+
 
         }
 
         return hm;
     }
 
+    //This method takes in a string and changes it
+    //so that there's only one word per a line
         public String wordSeparator(String str){
             String oneWordPerLine = str.replace(' ', '\n');
             return oneWordPerLine;
