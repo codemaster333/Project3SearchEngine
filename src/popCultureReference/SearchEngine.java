@@ -28,10 +28,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.logging.Handler;
-import java.util.Scanner;
 
 interface MainWindow {
 
@@ -47,6 +45,8 @@ interface MainWindow {
 
 
 public class SearchEngine implements MainWindow {
+
+	private static HashMap<String, String> hm = new HashMap<>();
 
 
 	private JFrame frame;
@@ -64,11 +64,16 @@ public class SearchEngine implements MainWindow {
 		The if statement is to handle the initial program startup where our File Reference.txt hasn't been created yet
 
 		 */
-		ArrayList<File> itTastesLikeKevinBacon = new ArrayList<File>();
+		ArrayList<File> itTastesLikeKevinBacon;
 		File f = new File("./File Reference Directory/File Reference.txt");
-		if(f.exists()) {
 			itTastesLikeKevinBacon = fc.ArrayListCreator();
-		}
+
+		hm = fc.HashMapper(itTastesLikeKevinBacon);
+
+
+
+
+
 
 
 					window.frame.setVisible(true);

@@ -4,6 +4,7 @@ import java.io.*;
 import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -37,7 +38,7 @@ public class FileCreator {
     Takes the path names line by line in the reference text and puts it into a String array
     Then it takes the path names and converts them into File references and places them into a file array
      */
-    public ArrayList<File> ArrayListCreator() throws IOException, FileNotFoundException {
+    public ArrayList<File> ArrayListCreator() throws IOException{
 
         BufferedReader in = new BufferedReader(new FileReader("./File Reference Directory/File Reference.txt"));
         String str;
@@ -46,13 +47,13 @@ public class FileCreator {
         ArrayList<File> fileList = new ArrayList<File>();
         while((str = in.readLine()) !=null){
             list.add(str);
-
         }
 
+
+
         for(String x: list){
-            String poop[] = (String[]) list.toArray();
             int iterate = 0;
-            File buttMunch = new File(poop[iterate]);
+            File buttMunch = new File(x);
             fileList.add(iterate, buttMunch);
             iterate++;
 
@@ -61,4 +62,38 @@ public class FileCreator {
         return fileList;
     }
 
-}
+    public HashMap HashMapper(ArrayList<File> fileArrayList) throws IOException {
+        HashMap<String, String> hm = new HashMap<>();
+
+        for (File x : fileArrayList) {
+
+            File temp = x;
+            BufferedReader reader = new BufferedReader( new FileReader (x));
+            String         line = null;
+            StringBuilder  sb = new StringBuilder();
+            String         ls = System.getProperty("line.separator");
+
+            while( ( line = reader.readLine() ) != null ) {
+                sb.append( line );
+                sb.append( ls );
+            }
+
+
+            hm.put(x.getName(), wordSeparator(sb.toString()));
+           // System.out.println(wordSeparator(sb.toString()));
+
+        }
+
+        return hm;
+    }
+
+        public String wordSeparator(String str){
+            String oneWordPerLine = str.replace(' ', '\n');
+            return oneWordPerLine;
+        }
+
+
+
+    }
+
+
