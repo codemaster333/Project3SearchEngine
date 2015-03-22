@@ -65,8 +65,15 @@ public class MaintenanceGUI implements MaintanceInterface {
 		frame.add(bottom, BorderLayout.SOUTH);
 		// South Button ActionListeners
 		
+		ListModel dynamicData = new AbstractListModel(){
+			public int getSize() {return Short.MAX_VALUE;} // Need to really implement
+			public Object getElementAt(int index){return "Index "+index;} //Need to really implement 
+		};
+			
+		
+		
 		JPanel top = new JPanel();
-		list = new JList(readContent.toArray());
+		JList list = new JList(readContent.toArray());
 		
 		JScrollPane listScroller = new JScrollPane(list);
 		listScroller.setPreferredSize(new Dimension (600,350));
