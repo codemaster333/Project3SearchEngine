@@ -1,26 +1,17 @@
 package popCultureReference;
-import com.sun.scenario.animation.shared.FiniteClipEnvelope;
-import com.sun.tools.doclets.internal.toolkit.util.DocFinder;
-import sun.java2d.pipe.SpanShapeRenderer;
+
+
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Scanner;
-
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JFileChooser;
 
-import javax.swing.table.DefaultTableModel;
+
 
 
 
@@ -39,11 +30,7 @@ interface MaintanceInterface {
 public class MaintenanceGUI implements MaintanceInterface {
 
 	private JFrame frame;
-	private ArrayList<File> readContent = new ArrayList<File>();
-	private int index = 0;
-	private JList list;
-	private static String [] namer;
-	JTable jt;
+
 
 	MaintenanceGUI(){
 		System.out.println("Maintenance Initialized");
@@ -64,51 +51,39 @@ public class MaintenanceGUI implements MaintanceInterface {
 		frame.setResizable(false);
 		frame.setLayout(new BorderLayout());
 
+		//JList
+		final DefaultListModel model = new DefaultListModel();
+		JPanel top = new JPanel();
+		JList list = new JList(model);
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		FileCreator fc = new FileCreator();
+		int iterator = 0;
+		File[] file = new File[fc.ArrayListCreator().size()];
+		file = fc.ArrayListCreator().toArray(file);
+
+		for(File x: file) {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+			model.addElement("Name: " + x.getName() +"\n Path: "+x.getAbsolutePath()+"\n Last Modified: "+ sdf.format(x.lastModified()));
+			iterator++;
+		}
+
+		JScrollPane listScroller = new JScrollPane(list);
+		listScroller.setPreferredSize(new Dimension (600,350));
+		top.add(listScroller);
+
+		frame.add(top, BorderLayout.CENTER);
 
 			//South Buttons
 		JPanel bottom = new JPanel();
 			JButton addFileButton = new JButton("Add File");
-			JButton deleteFileButton = new JButton("Delete File");
-			JButton rebuildFileButton = new JButton("Rebuild File");
+		JButton deleteFileButton = new JButton("Delete File");
+		JButton rebuildFileButton = new JButton("Rebuild File");
 			bottom.add(addFileButton);
 			bottom.add(deleteFileButton);
 			bottom.add(rebuildFileButton);
 			frame.add(bottom, BorderLayout.SOUTH);
 
-		//JList
-		final DefaultListModel model = new DefaultListModel();
 
-		JPanel top = new JPanel();
-		//JList list = new JList(readContent.toArray());
-		JList list = new JList(model);
-		FileCreator fc = new FileCreator();
-		int iterator = 0;
-		File[] file = new File[fc.ArrayListCreator().size()];
-		file = fc.ArrayListCreator().toArray(file);
-		for(File x: file) {
-
-
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-			model.addElement("Name: " + x.getName() +"\n Path: "+x.getAbsolutePath()+"\n Last Modified: "+ sdf.format(x.lastModified()));
-			 iterator++;//This is how you add stuff to JList. Remove is
-			//model.removeElementAt(model.getSize() - 1);
-
-		}
-		JScrollPane listScroller = new JScrollPane(list);
-		listScroller.setPreferredSize(new Dimension (600,350));
-		top.add(listScroller);
-
-		class MutableList extends JList{
-			MutableList(){
-				super(new DefaultListModel());
-			}
-			DefaultListModel getContents(){
-				return (DefaultListModel)getModel();
-			}
-		}
-
-
-		frame.add(top, BorderLayout.CENTER);
 
 
 		//South Button ActionListeners
@@ -174,15 +149,6 @@ public class MaintenanceGUI implements MaintanceInterface {
       // TODO Auto-generated method stub
 
    }
-
-	public void myJTable(){
-
-
-
-	}
-
-
-
 
 
 
