@@ -71,7 +71,7 @@ public class SearchEngine implements MainWindow {
 			File temp = new File("./File Reference Directory/File Reference.txt");
 			FileWriter writer = new FileWriter(temp, true);
 		}
-		HashMap<String, String> hm;
+		HashMap<File, String> hm;
 		SearchEngine window = new SearchEngine();
 		FileCreator fc = new FileCreator();
 		/*

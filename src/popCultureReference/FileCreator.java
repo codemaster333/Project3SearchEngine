@@ -73,7 +73,7 @@ public class FileCreator {
 
      */
     public HashMap HashMapper(ArrayList<File> fileArrayList) throws IOException {
-        HashMap<String, String> hm = new HashMap<>();
+        HashMap<File, String> hm = new HashMap<>();
 
         for (File x : fileArrayList) {
             BufferedReader reader = new BufferedReader( new FileReader (x));
@@ -86,7 +86,7 @@ public class FileCreator {
                 sb.append( ls );
             }
 
-            hm.put(x.getName(), wordSeparator(sb.toString()));
+            hm.put(x, wordSeparator(sb.toString()));
 
         }
 
