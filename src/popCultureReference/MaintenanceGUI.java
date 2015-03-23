@@ -1,21 +1,14 @@
 package popCultureReference;
 
-
-
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.*;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.JFileChooser;
-
-
-
-//
-
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 interface MaintanceInterface {
 
@@ -30,17 +23,14 @@ interface MaintanceInterface {
 
 public class MaintenanceGUI implements MaintanceInterface {
 
-	private JFrame frame;
 	FileCreator fc = new FileCreator();
+	private JFrame frame;
 
 
 	MaintenanceGUI(){
 		System.out.println("Maintenance Initialized");
 		try {initialize();} catch (IOException e) {e.printStackTrace();}
 	}
-
-
-
 
 	public void initialize() throws IOException {
 		//table data initialization
@@ -54,8 +44,6 @@ public class MaintenanceGUI implements MaintanceInterface {
 		frame.setLayout(new BorderLayout());
 
 		//JList
-
-
 		JPanel top = new JPanel();
 		JList list = new JList(fc.stringFling(fc.ArrayListCreator()).toArray(new String[fc.stringFling(fc.ArrayListCreator()).size()]));
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -71,11 +59,6 @@ public class MaintenanceGUI implements MaintanceInterface {
 					}
 				}
 		);
-
-		//list.add
-
-
-
 
 		frame.add(top, BorderLayout.CENTER);
 
@@ -133,10 +116,16 @@ public class MaintenanceGUI implements MaintanceInterface {
 	@Override
 	public void addFile(){
 
+		/*
+		This disposes of the old frame (closes)
+ 		*/
 		frame.setVisible(false);
 		frame.dispose();
-		/*
 
+		/*
+		Brings up a filechooser that only selects .txt files
+		If the user force it to choose a non .txt file it pulls up a dialog box telling them that only text files can be selected
+		Also if they choose a non .txt, it's not added into anything (reference text, arrays, etc.)
 		 */
 		FileCreator fc = new FileCreator();
 		JFileChooser chooser = new JFileChooser();
@@ -154,6 +143,9 @@ public class MaintenanceGUI implements MaintanceInterface {
 			}
 		}
 
+		/*
+		This re-initializes the updated maintenance gui so that it shows files that have been added
+		 */
 		try {
 			initialize();
 		} catch (IOException e) {
