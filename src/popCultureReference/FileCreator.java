@@ -1,5 +1,7 @@
 package popCultureReference;
 
+import sun.java2d.pipe.SpanShapeRenderer;
+
 import java.io.*;
 import java.nio.file.Path;
 import java.text.SimpleDateFormat;
@@ -40,18 +42,20 @@ public class FileCreator {
         BufferedReader in = new BufferedReader(new FileReader("./File Reference Directory/File Reference.txt"));
         String str;
 
-        ArrayList<String> list = new ArrayList<String>();
-        ArrayList<File> fileList = new ArrayList<File>();
+        ArrayList<String> list = new ArrayList<>();
+        ArrayList<File> fileList = new ArrayList<>();
         while((str = in.readLine()) !=null){
             list.add(str);
         }
-
+        int iterate = 0;
         for(String x: list){
-            int iterate = 0;
-            File buttMunch = new File(x);
-            fileList.add(iterate, buttMunch);
+
+            File file = new File(x);
+            fileList.add(iterate, file);
             iterate++;
         }
+
+
 
         return fileList;
     }
@@ -77,7 +81,7 @@ public class FileCreator {
 
         for (File x : fileArrayList) {
             BufferedReader reader = new BufferedReader( new FileReader (x));
-            String         line = null;
+            String         line;
             StringBuilder  sb = new StringBuilder();
             String         ls = System.getProperty("line.separator");
 
@@ -96,9 +100,21 @@ public class FileCreator {
     //This method takes in a string and changes it
     //so that there's only one word per a line
         public String wordSeparator(String str){
-            String oneWordPerLine = str.replace(' ', '\n');
-            return oneWordPerLine;
+            return str.replace(' ', '\n');
         }
+
+    public ArrayList<String> stringFling(ArrayList<File> fileArrayList) throws IOException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        ArrayList<String> stringArrayList = new ArrayList<>();
+         int iterator = 0;
+        for(File x: fileArrayList){
+            stringArrayList.add(iterator, "Name: "+ x.getName()+"\nPath: "+x.getAbsolutePath()+"\nLast Modified: "+sdf.format(x.lastModified()));
+            iterator++;
+        }
+
+
+        return stringArrayList;
+    }
 
 
 

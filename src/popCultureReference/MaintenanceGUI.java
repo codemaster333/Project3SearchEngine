@@ -6,8 +6,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.text.SimpleDateFormat;
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JFileChooser;
 
@@ -30,6 +31,7 @@ interface MaintanceInterface {
 public class MaintenanceGUI implements MaintanceInterface {
 
 	private JFrame frame;
+	FileCreator fc = new FileCreator();
 
 
 	MaintenanceGUI(){
@@ -40,7 +42,7 @@ public class MaintenanceGUI implements MaintanceInterface {
 
 
 
-	private void initialize() throws IOException {
+	public void initialize() throws IOException {
 		//table data initialization
 		frame = new JFrame();
 		frame.setTitle("Maintenance");
@@ -52,24 +54,28 @@ public class MaintenanceGUI implements MaintanceInterface {
 		frame.setLayout(new BorderLayout());
 
 		//JList
-		final DefaultListModel model = new DefaultListModel();
+
+
 		JPanel top = new JPanel();
-		JList list = new JList(model);
+		JList list = new JList(fc.stringFling(fc.ArrayListCreator()).toArray(new String[fc.stringFling(fc.ArrayListCreator()).size()]));
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		FileCreator fc = new FileCreator();
-		int iterator = 0;
-		File[] file = new File[fc.ArrayListCreator().size()];
-		file = fc.ArrayListCreator().toArray(file);
-
-		for(File x: file) {
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-			model.addElement("Name: " + x.getName() +"\n Path: "+x.getAbsolutePath()+"\n Last Modified: "+ sdf.format(x.lastModified()));
-			iterator++;
-		}
-
 		JScrollPane listScroller = new JScrollPane(list);
 		listScroller.setPreferredSize(new Dimension (600,350));
 		top.add(listScroller);
+
+		list.addListSelectionListener(
+				new ListSelectionListener(){
+					@Override
+					public void valueChanged(ListSelectionEvent e) {
+
+					}
+				}
+		);
+
+		//list.add
+
+
+
 
 		frame.add(top, BorderLayout.CENTER);
 
@@ -91,6 +97,7 @@ public class MaintenanceGUI implements MaintanceInterface {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				addFile();
+
 			}
 		});
 
@@ -125,6 +132,9 @@ public class MaintenanceGUI implements MaintanceInterface {
 	 */
 	@Override
 	public void addFile(){
+
+		frame.setVisible(false);
+		frame.dispose();
 		/*
 
 		 */
@@ -133,11 +143,23 @@ public class MaintenanceGUI implements MaintanceInterface {
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files Only", "txt");
 		chooser.setFileFilter(filter);
 		if(chooser.showOpenDialog(null)==JFileChooser.APPROVE_OPTION){
-
 			File chosenFile = chooser.getSelectedFile();
-			try {fc.FileWriterAwesome(chosenFile);} catch (IOException e) {e.printStackTrace();}
+			StringBuilder sb = new StringBuilder(chosenFile.getName());
+
+			if(!sb.subSequence(sb.length()-4, sb.length()).equals(".txt")){
+				JOptionPane.showMessageDialog(null ,"Only text files with the extension '.txt' can be selected.\nClose this dialog box and try again, fool!");
+			}
+			else {
+				try {fc.FileWriterAwesome(chosenFile);} catch (IOException e) {e.printStackTrace();}
+			}
 		}
-   }
+
+		try {
+			initialize();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
    @Override
    public void rebuildData() {

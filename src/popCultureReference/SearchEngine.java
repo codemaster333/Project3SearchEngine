@@ -30,10 +30,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.logging.Handler;
 
 interface MainWindow {
 
@@ -82,10 +80,6 @@ public class SearchEngine implements MainWindow {
 		//File f = new File("./File Reference Directory/File Reference.txt");
 			itTastesLikeKevinBacon = fc.ArrayListCreator();
 		hm = fc.HashMapper(itTastesLikeKevinBacon);
-		System.out.println(hm);
-
-
-
 
 
 					window.frame.setVisible(true);
