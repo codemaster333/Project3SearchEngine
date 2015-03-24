@@ -19,6 +19,7 @@ public class FileCreator {
     }
 
     /*
+
     Creates a file in the "File Reference Directory" folder
     Writes the path name of the selected file to the created .txt
     Every time a new file is selected it adds a new path name
