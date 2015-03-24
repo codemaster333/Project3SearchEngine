@@ -30,8 +30,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.HashMap;
+=======
+import java.util.*;
+>>>>>>> BrannonPart2
 
 interface MainWindow {
 
@@ -49,6 +53,7 @@ interface MainWindow {
 public class SearchEngine implements MainWindow {
 
 
+<<<<<<< HEAD
 	private JFrame frame;
 
 
@@ -58,11 +63,46 @@ public class SearchEngine implements MainWindow {
 	public SearchEngine() {
 		initialize();
 	}
+=======
+
+
+
+	private JFrame frame;
+
+>>>>>>> BrannonPart2
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) throws IOException {
+<<<<<<< HEAD
+=======
+
+		/*
+		This code checks if "./File Reference Directory/File Reference.txt" exists
+		If it doesn't, it creates it.
+		 */
+		if(Files.notExists(Paths.get("./File Reference Directory/File Reference.txt"))){
+			new File("./File Reference Directory").mkdir();
+			File temp = new File("./File Reference Directory/File Reference.txt");
+			FileWriter writer = new FileWriter(temp, true);
+		}
+		HashMap<File, String> hm;
+		SearchEngine window = new SearchEngine();
+		FileCreator fc = new FileCreator();
+		/*
+		Makes itTastesLikeKevinBacon equal to the File arraylist created in FileCreator.ArrayListCreator
+		The if statement is to handle the initial program startup where our File Reference.txt hasn't been created yet
+		 */
+		ArrayList<File> itTastesLikeKevinBacon;
+		//File f = new File("./File Reference Directory/File Reference.txt");
+			itTastesLikeKevinBacon = fc.ArrayListCreator();
+		hm = fc.HashMapper(itTastesLikeKevinBacon);
+
+
+					window.frame.setVisible(true);
+	}
+>>>>>>> BrannonPart2
 
 		/*
 		This code checks if "./File Reference Directory/File Reference.txt" exists
@@ -193,6 +233,7 @@ public class SearchEngine implements MainWindow {
 		searchTypePanel.add(exactPhraseButton);
 
 		frame.getContentPane().add(searchTypePanel, BorderLayout.SOUTH);
+<<<<<<< HEAD
 
 		allSearchTermButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -218,6 +259,41 @@ public class SearchEngine implements MainWindow {
 				search(search);
 			}
 		});
+=======
+		
+		allSearchTermButton.addActionListener( new ActionListener()
+		{
+		 public void actionPerformed (ActionEvent e)
+		 {
+			 allSearchTerms();
+		 }
+		 }); 
+		
+		anySearchButton.addActionListener( new ActionListener()
+		{
+		 public void actionPerformed (ActionEvent e)
+		 {
+			 anySearchTerms();
+		 }
+		 }); 
+		
+		exactPhraseButton.addActionListener( new ActionListener()
+		{
+		 public void actionPerformed (ActionEvent e)
+		 {
+			 exactPhrase();
+		 }
+		 }); 
+		
+		searchButton.addActionListener( new ActionListener()
+		{
+		 public void actionPerformed (ActionEvent e)
+		 {
+			 String search = "Search string from field when implemented";
+			 search(search);
+		 }
+		 });
+>>>>>>> BrannonPart2
 	}
 
 	@Override
