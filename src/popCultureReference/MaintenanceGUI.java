@@ -17,13 +17,10 @@ interface MaintanceInterface {
 
 	void rebuildData();
 
-<<<<<<< HEAD
 	void removeFile();
 
 }
 
-=======
->>>>>>> BrannonPart2
 public class MaintenanceGUI implements MaintanceInterface {
 
 	FileCreator fc = new FileCreator();
@@ -32,15 +29,7 @@ public class MaintenanceGUI implements MaintanceInterface {
 
 	MaintenanceGUI(){
 		System.out.println("Maintenance Initialized");
-<<<<<<< HEAD
-		try {
-			initialize();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-=======
 		try {initialize();} catch (IOException e) {e.printStackTrace();}
->>>>>>> BrannonPart2
 	}
 
 	public void initialize() throws IOException {
@@ -59,19 +48,11 @@ public class MaintenanceGUI implements MaintanceInterface {
 		JList list = new JList(fc.stringFling(fc.ArrayListCreator()).toArray(new String[fc.stringFling(fc.ArrayListCreator()).size()]));
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		JScrollPane listScroller = new JScrollPane(list);
-<<<<<<< HEAD
-		listScroller.setPreferredSize(new Dimension(600, 350));
-		top.add(listScroller);
-
-		list.addListSelectionListener(
-				new ListSelectionListener() {
-=======
 		listScroller.setPreferredSize(new Dimension (600,350));
 		top.add(listScroller);
 
 		list.addListSelectionListener(
 				new ListSelectionListener(){
->>>>>>> BrannonPart2
 					@Override
 					public void valueChanged(ListSelectionEvent e) {
 
@@ -81,17 +62,6 @@ public class MaintenanceGUI implements MaintanceInterface {
 
 		frame.add(top, BorderLayout.CENTER);
 
-<<<<<<< HEAD
-		//South Buttons
-		JPanel bottom = new JPanel();
-		JButton addFileButton = new JButton("Add File");
-		JButton deleteFileButton = new JButton("Delete File");
-		JButton rebuildFileButton = new JButton("Rebuild File");
-		bottom.add(addFileButton);
-		bottom.add(deleteFileButton);
-		bottom.add(rebuildFileButton);
-		frame.add(bottom, BorderLayout.SOUTH);
-=======
 			//South Buttons
 		JPanel bottom = new JPanel();
 			JButton addFileButton = new JButton("Add File");
@@ -103,26 +73,11 @@ public class MaintenanceGUI implements MaintanceInterface {
 			frame.add(bottom, BorderLayout.SOUTH);
 
 
->>>>>>> BrannonPart2
 
 
 		//South Button ActionListeners
 		addFileButton.addActionListener(new ActionListener() {
 			@Override
-<<<<<<< HEAD
-			public void actionPerformed(ActionEvent e) {
-				addFile();
-
-			}
-		});
-
-		deleteFileButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
-=======
 			public void actionPerformed(ActionEvent e) {
 				addFile();
 
@@ -206,91 +161,9 @@ public class MaintenanceGUI implements MaintanceInterface {
    @Override
    public void removeFile() {
       // TODO Auto-generated method stub
->>>>>>> BrannonPart2
 
-		rebuildFileButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-<<<<<<< HEAD
-			}
-		});
-
-	}
-
-
-	/*
-	Is called when the "Add File" button is clicked
-	A new instance of FileCreator is created
-	A file chooser that only allows for the selection of .txt files is brought up
-	The selected file is then passed into the method "FileWriterAwesome" which is located in the FileCreator class
-
-	What FileWriterAwesome does:
-	Creates a file in the "File Reference Directory" folder
-    Writes the path name of the selected file to the created .txt
-    Every time a new file is selected it adds a new path name
-
-	 */
-	@Override
-	public void addFile() {
-
-		/*
-		This disposes of the old frame (closes)
- 		*/
-		frame.setVisible(false);
-		frame.dispose();
-
-		/*
-		Brings up a filechooser that only selects .txt files
-		If the user force it to choose a non .txt file it pulls up a dialog box telling them that only text files can be selected
-		Also if they choose a non .txt, it's not added into anything (reference text, arrays, etc.)
-		 */
-		FileCreator fc = new FileCreator();
-		JFileChooser chooser = new JFileChooser();
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files Only", "txt");
-		chooser.setFileFilter(filter);
-		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-			File chosenFile = chooser.getSelectedFile();
-			StringBuilder sb = new StringBuilder(chosenFile.getName());
-
-			if (!sb.subSequence(sb.length() - 4, sb.length()).equals(".txt")) {
-				JOptionPane.showMessageDialog(null, "Only text files with the extension '.txt' can be selected.\nClose this dialog box and try again, fool!");
-			} else {
-				try {
-					fc.FileWriterAwesome(chosenFile);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-		/*
-		This re-initializes the updated maintenance gui so that it shows files that have been added
-		 */
-		try {
-			initialize();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-=======
->>>>>>> BrannonPart2
-
-	@Override
-	public void rebuildData() {
-		// TODO Auto-generated method stub
-
-<<<<<<< HEAD
-	}
-
-	@Override
-	public void removeFile() {
-		// TODO Auto-generated method stub
-
-	}
+   }
 
 
 
-=======
->>>>>>> BrannonPart2
 }

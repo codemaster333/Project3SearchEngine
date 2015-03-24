@@ -1,13 +1,9 @@
 package popCultureReference;
 
-import sun.java2d.pipe.SpanShapeRenderer;
-
 import java.io.*;
-import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 
 /**
  * Created by brannoncenteno on 3/19/15.
@@ -19,7 +15,6 @@ public class FileCreator {
     }
 
     /*
-
     Creates a file in the "File Reference Directory" folder
     Writes the path name of the selected file to the created .txt
     Every time a new file is selected it adds a new path name
