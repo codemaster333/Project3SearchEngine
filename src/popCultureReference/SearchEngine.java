@@ -18,7 +18,6 @@ package popCultureReference;
  *  Made it so the radio buttons deselect if you choose a different one
  *  Made it so that when the Maintenance button is pressed, a new window pops up
  *  ...
- *
  */
 
 
