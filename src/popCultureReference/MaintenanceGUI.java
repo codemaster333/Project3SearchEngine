@@ -45,7 +45,7 @@ public class MaintenanceGUI implements MaintanceInterface {
 
 		//JList
 		JPanel top = new JPanel();
-		JList list = new JList(fc.stringFling(fc.ArrayListCreator()).toArray(new String[fc.stringFling(fc.ArrayListCreator()).size()]));
+		JList list = new JList();
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		JScrollPane listScroller = new JScrollPane(list);
 		listScroller.setPreferredSize(new Dimension (600,350));
@@ -76,27 +76,13 @@ public class MaintenanceGUI implements MaintanceInterface {
 
 
 		//South Button ActionListeners
-		addFileButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				addFile();
+		addFileButton.addActionListener(e -> addFile());
 
-			}
-		});
 
-		deleteFileButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
+		deleteFileButton.addActionListener(e -> dummy());
 
-			}
-		});
 
-		rebuildFileButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
+		rebuildFileButton.addActionListener(e -> dummy());
 
 		}
 
@@ -163,6 +149,10 @@ public class MaintenanceGUI implements MaintanceInterface {
       // TODO Auto-generated method stub
 
    }
+
+	public void dummy(){
+		System.out.println("Dummy");
+	}
 
 
 
