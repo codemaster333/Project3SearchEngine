@@ -11,13 +11,18 @@ import java.util.Scanner;
 
 /**
  * Created by brannoncenteno on 3/19/15.
+ *
  */
+
+
+
 public class FileCreator {
 
     FileCreator(){
         System.out.println("File Creator Initialized");
     }
 
+    ///////////////////////////////////////////////////////////
     /*
     Creates a file in the "File Reference Directory" folder
     Writes the path name of the selected file to the created .txt
@@ -31,7 +36,10 @@ public class FileCreator {
         writer.write(sb.toString()+"\n");
         writer.flush();
     }
+    /////////////////////////////////////////////////////////////
 
+
+////////////////////////////////////////////////////////////////////////
     /*
     Reads the reference text
     Takes the path names line by line in the reference text and puts it into a String array
@@ -54,11 +62,9 @@ public class FileCreator {
             fileList.add(iterate, file);
             iterate++;
         }
-
-
-
         return fileList;
     }
+    /////////////////////////////////////////////////////////////////
 
     /*
     This methods takes in an arraylist of type File.
@@ -99,7 +105,7 @@ public class FileCreator {
 
     //This method takes in a string and changes it
     //so that there's only one word per a line
-        public String wordSeparator(String str){
+    public String wordSeparator(String str){
             return str.replace(' ', '\n');
         }
 
