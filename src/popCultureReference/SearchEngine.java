@@ -15,7 +15,9 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.Normalizer;
 import java.util.*;
+import java.util.prefs.Preferences;
 
 
 interface MainWindow {
@@ -42,11 +44,6 @@ public class SearchEngine implements MainWindow {
     */
    public static void main(String[] args) throws IOException {
 
-		/* Reuse this code to make the check for if the file exists
-      This code checks if "./File Reference Directory/File Reference.txt" exists
-		If it doesn't, it creates it.
-		 */
-
       if (Files.notExists(Paths.get("./File Reference Directory/File Reference.txt"))) {
          new File("./File Reference Directory").mkdir();
          File temp = new File("./File Reference Directory/File Reference.txt");
@@ -54,10 +51,6 @@ public class SearchEngine implements MainWindow {
       }
 
 
-		/*
-		Makes itTastesLikeKevinBacon equal to the File arraylist created in FileCreator.ArrayListCreator
-		The if statement is to handle the initial program startup where our File Reference.txt hasn't been created yet
-		 */
       SearchEngine window = new SearchEngine();
       window.frame.setVisible(true);
    }
@@ -82,9 +75,12 @@ public class SearchEngine implements MainWindow {
     * Initialize the contents of the frame.
     */
    private void initialize() {
+      //Preferences arent working yet
+      Preferences userPreferences = Preferences.userRoot();
+
       frame = new JFrame();
       frame.setTitle("Search Engine");
-      frame.setBounds(100, 100, 600, 400);
+      frame.setBounds(userPreferences.getInt("x", 100), userPreferences.getInt("y", 100), 600, 400);
       frame.setResizable(false);
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -129,22 +125,14 @@ public class SearchEngine implements MainWindow {
       JButton searchButton = new JButton("Search");
       searchBarPanel.add(searchButton);
       searchButton.addActionListener(e -> {
-
-         System.out.println("Search Button has Been clicked");
-         String search = "Search string from field when implemented";
-
-         try {
-            ArraySearcher();
-         } catch (IOException ex) {
-            ex.printStackTrace();
-         }
-         search(search);
-
+         String terms = Normalizer.normalize(searchField.getText(), Normalizer.Form.NFKC);
+         System.out.println(terms);
 
          switch (selection) {
             case 1:
                anySearchTerms();
                System.out.println("We did it 1");
+
                break;
             case 2:
                allSearchTerms();
@@ -155,30 +143,30 @@ public class SearchEngine implements MainWindow {
                System.out.println("We did it 3");
                break;
 
-            default: selection = 0;
+            default:
+               selection = 0;
          }
-
-
       });
 
-		/* Search Results Panel */
 
 
+      /////////////////Center JText Area//////////////////////////////////////
       JPanel resultPanel = new JPanel();
       frame.getContentPane().add(resultPanel);
 
-      JTextArea textArea = new JTextArea("hey", 18, 49);
+      JTextArea textArea = new JTextArea(15, 49);
       textArea.setEditable(false);
-      textArea.setRows(15);
+
       resultPanel.add(textArea);
 
       JTextArea resultArea = new JTextArea();
       resultArea.setEditable(false);
       resultPanel.add(resultArea);
-		
+      //textArea.setText();
+      /////////////////////////////////////////////////////////////////////////
 
-		
-		/* Low Bar */
+
+      //////////////Radio Button Stuff (South)////////////////////////////////////////////////////////////////////////////////////////////////
 
       JPanel searchTypePanel = new JPanel();
 
@@ -197,13 +185,12 @@ public class SearchEngine implements MainWindow {
       searchTypePanel.add(exactPhraseButton);
 
       ButtonGroup group = new ButtonGroup();
-      group.add(allSearchTermButton);
-      group.add(anySearchButton);
-      group.add(exactPhraseButton);
-
-      searchTypePanel.add(allSearchTermButton);
-      searchTypePanel.add(anySearchButton);
-      searchTypePanel.add(exactPhraseButton);
+         group.add(allSearchTermButton);
+         group.add(anySearchButton);
+         group.add(exactPhraseButton);
+         searchTypePanel.add(allSearchTermButton);
+         searchTypePanel.add(anySearchButton);
+         searchTypePanel.add(exactPhraseButton);
 
       frame.getContentPane().add(searchTypePanel, BorderLayout.SOUTH);
 
@@ -222,6 +209,8 @@ public class SearchEngine implements MainWindow {
          selection = 3;
          System.out.println("Exact Phrase Search Activated");
       });
+
+      //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
    }
