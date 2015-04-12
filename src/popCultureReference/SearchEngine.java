@@ -75,12 +75,12 @@ public class SearchEngine implements MainWindow {
     * Initialize the contents of the frame.
     */
    private void initialize() {
-      //Preferences arent working yet
-      Preferences userPreferences = Preferences.userRoot();
+
+
 
       frame = new JFrame();
       frame.setTitle("Search Engine");
-      frame.setBounds(userPreferences.getInt("x", 100), userPreferences.getInt("y", 100), 600, 400);
+      frame.setBounds(100, 100, 600, 400);
       frame.setResizable(false);
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -149,7 +149,6 @@ public class SearchEngine implements MainWindow {
       });
 
 
-
       /////////////////Center JText Area//////////////////////////////////////
       JPanel resultPanel = new JPanel();
       frame.getContentPane().add(resultPanel);
@@ -185,12 +184,12 @@ public class SearchEngine implements MainWindow {
       searchTypePanel.add(exactPhraseButton);
 
       ButtonGroup group = new ButtonGroup();
-         group.add(allSearchTermButton);
-         group.add(anySearchButton);
-         group.add(exactPhraseButton);
-         searchTypePanel.add(allSearchTermButton);
-         searchTypePanel.add(anySearchButton);
-         searchTypePanel.add(exactPhraseButton);
+      group.add(allSearchTermButton);
+      group.add(anySearchButton);
+      group.add(exactPhraseButton);
+      searchTypePanel.add(allSearchTermButton);
+      searchTypePanel.add(anySearchButton);
+      searchTypePanel.add(exactPhraseButton);
 
       frame.getContentPane().add(searchTypePanel, BorderLayout.SOUTH);
 
@@ -238,34 +237,7 @@ public class SearchEngine implements MainWindow {
 
    public boolean ArraySearcher() throws IOException {
 
-      FileCreator fc = new FileCreator();
-      StringBuilder sb = new StringBuilder();
-      ArrayList<File> arrayList = new ArrayList<>();
-      arrayList = fc.ArrayListCreator();
-
-
-      for (File file : arrayList) {
-
-         BufferedReader br = new BufferedReader(new FileReader(file));
-
-         for (String line; (line = br.readLine()) != null; ) {
-            sb.append(line + "\n");
-         }
-
-         System.out.println(sb);
-         System.out.println("////////////////////////////////////////////////////");
-
-         String string = sb.toString();
-         string = fc.wordSeparator(string);
-
-         ArrayList<String> str = new ArrayList<>();
-
-
-      }
-
-
       return true;
    }
-
 
 }

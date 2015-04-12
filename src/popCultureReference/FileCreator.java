@@ -5,10 +5,7 @@ import sun.java2d.pipe.SpanShapeRenderer;
 import java.io.*;
 import java.nio.file.Path;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by brannoncenteno on 3/19/15.
@@ -29,6 +26,13 @@ public class FileCreator {
     Every time a new file is selected it adds a new path name
      */
    public void FileWriterAwesome(File myFile) throws IOException {
+      /*
+      Before the path name is written to the .txt file I want
+      to check to see if the path name already exists in the .txt.
+       */
+
+
+
       StringBuilder sb = new StringBuilder();
       sb.append(myFile.getAbsolutePath());
       File temp = new File("./File Reference Directory/File Reference.txt");
@@ -50,17 +54,17 @@ public class FileCreator {
       BufferedReader in = new BufferedReader(new FileReader("./File Reference Directory/File Reference.txt"));
       String str;
 
-      ArrayList<String> list = new ArrayList<>();
+      List<String> list = new ArrayList<>();
       ArrayList<File> fileList = new ArrayList<>();
       while ((str = in.readLine()) != null) {
          list.add(str);
       }
-      int iterate = 0;
+
       for (String x : list) {
 
          File file = new File(x);
-         fileList.add(iterate, file);
-         iterate++;
+         fileList.add(file);
+
       }
       return fileList;
    }
