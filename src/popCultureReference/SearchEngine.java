@@ -239,5 +239,18 @@ public class SearchEngine implements MainWindow {
 
       return true;
    }
+   
+   public static List searchText(File file, String searchTerm) throws FileNotFoundException { //Computer problems wont let me test code, please test
+		List result = new ArrayList();
+		Scanner scan = new Scanner(file);
+		while (scan.hasNextLine()){
+			String text = scan.nextLine();
+			int indexfound = text.indexOf(searchTerm);
+			if( indexfound > -1){
+				 result.add(file.getName());
+			}
+		}
+		
+		return result;
 
 }
