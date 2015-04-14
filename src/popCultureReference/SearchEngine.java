@@ -231,8 +231,29 @@ public class SearchEngine implements MainWindow {
 
    @Override
    public void search(String Terms) {
-      // TODO Auto-generated method stub
+     //Untested!!! Please test
+ public void anySearchTerms(String terms) {
+ArrayList<String> enteredSearchTerms = new ArrayList<>();
 
+string fileTerms = "";
+
+Scanner scanner = new Scanner(terms);
+
+while(scanner.hasNextLine()){
+enteredSearchTerms.add(scanner.nextLine());
+fileTerms= fileTerms + scanner.nextLine();
+}
+
+
+try {
+for(File y: fc.ArrayListCreator()){
+if(fileTerms == terms){
+System.out.println(y.getName());
+}
+}
+} catch (IOException e) {e.printStackTrace();}
+
+}
    }
 
    public boolean ArraySearcher() throws IOException {
@@ -240,7 +261,7 @@ public class SearchEngine implements MainWindow {
       return true;
    }
    
-   public static List searchText(File file, String searchTerm) throws FileNotFoundException { //Computer problems wont let me test code, please test
+   public static List searchText(File file, String searchTerm) throws FileNotFoundException { //Untested!!! please test
 		List result = new ArrayList();
 		Scanner scan = new Scanner(file);
 		while (scan.hasNextLine()){
