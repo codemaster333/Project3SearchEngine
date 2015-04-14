@@ -38,14 +38,14 @@ public class SearchEngine implements MainWindow {
    private JFrame frame;
    private int selection;
    FileCreator fc = new FileCreator();
-
+   JTextArea textArea;
+   GetsAndSets getsAndSets = new GetsAndSets();
 
 
    /**
     * Launch the application.
     */
    public static void main(String[] args) throws IOException {
-
 
 
       if (Files.notExists(Paths.get("./File Reference Directory/File Reference.txt"))) {
@@ -79,7 +79,6 @@ public class SearchEngine implements MainWindow {
     * Initialize the contents of the frame.
     */
    private void initialize() {
-
 
 
       frame = new JFrame();
@@ -135,18 +134,22 @@ public class SearchEngine implements MainWindow {
          switch (selection) {
             case 1:
                allSearchTerms(terms);
+               textArea.setText("null");
                break;
 
             case 2:
-               anySearchTerms(terms);;
+               anySearchTerms(terms);
+               textArea.setText(getsAndSets.getTextAreaDisplayer());
                break;
 
             case 3:
                exactPhrase();
+               textArea.setText("null");
                break;
 
             default:
                selection = 0;
+
          }
       });
 
@@ -155,7 +158,7 @@ public class SearchEngine implements MainWindow {
       JPanel resultPanel = new JPanel();
       frame.getContentPane().add(resultPanel);
 
-      JTextArea textArea = new JTextArea(15, 49);
+      textArea = new JTextArea(15, 49);
       textArea.setEditable(false);
 
       resultPanel.add(textArea);
@@ -203,6 +206,7 @@ public class SearchEngine implements MainWindow {
       anySearchButton.addActionListener(e -> {
          selection = 2;
          System.out.println("Any Search Activated");
+
       });
 
 
@@ -219,43 +223,41 @@ public class SearchEngine implements MainWindow {
    @Override
    public void allSearchTerms(String terms) {
 
+
+
    }
 
    @Override
    public void anySearchTerms(String terms) {
+      HashSet<String> isInFile = new HashSet<>();
       ArrayList<String> enteredSearchTerms = new ArrayList<>();
       Scanner scanner = new Scanner(terms);
-      while(scanner.hasNextLine()){
+      while (scanner.hasNextLine()) {
          enteredSearchTerms.add(scanner.nextLine());
 
       }
 
-      for(String x: enteredSearchTerms){
+      for (String x : enteredSearchTerms) {
 
 
          try {
-            for(File y: fc.ArrayListCreator()){
+            for (File y : fc.ArrayListCreator()) {
 
                ArrayList<String> termsInFile = fc.FileToString(y);
 
-               if(termsInFile.contains(x) == true){
-                  System.out.println(y.getName());
+               if (termsInFile.contains(x) == true) {
+                  isInFile.add(y.getName());
                }
-
-
-
-
-
-
             }
 
-
-
-
-         } catch (IOException e) {e.printStackTrace();}
+         } catch (IOException e) {
+            e.printStackTrace();
+         }
 
       }
 
+      getsAndSets.setContainsTheWord(isInFile);
+      getsAndSets.setTextAreaDisplayer(fc.changeHashSetIntoText(getsAndSets.getContainsTheWord()));
 
    }
 
@@ -269,7 +271,6 @@ public class SearchEngine implements MainWindow {
       // TODO Auto-generated method stub
 
    }
-
 
 
 }
