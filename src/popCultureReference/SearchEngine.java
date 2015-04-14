@@ -23,9 +23,9 @@ import java.util.prefs.Preferences;
 interface MainWindow {
 
 
-   void allSearchTerms();
+   void allSearchTerms(String terms);
 
-   void anySearchTerms();
+   void anySearchTerms(String terms);
 
    void exactPhrase();
 
@@ -37,12 +37,16 @@ public class SearchEngine implements MainWindow {
 
    private JFrame frame;
    private int selection;
+   FileCreator fc = new FileCreator();
+
 
 
    /**
     * Launch the application.
     */
    public static void main(String[] args) throws IOException {
+
+
 
       if (Files.notExists(Paths.get("./File Reference Directory/File Reference.txt"))) {
          new File("./File Reference Directory").mkdir();
@@ -125,22 +129,20 @@ public class SearchEngine implements MainWindow {
       JButton searchButton = new JButton("Search");
       searchBarPanel.add(searchButton);
       searchButton.addActionListener(e -> {
-         String terms = Normalizer.normalize(searchField.getText(), Normalizer.Form.NFKC);
+         String terms = fc.wordSeparator(Normalizer.normalize(searchField.getText(), Normalizer.Form.NFKC));
          System.out.println(terms);
 
          switch (selection) {
             case 1:
-               anySearchTerms();
-               System.out.println("We did it 1");
+               allSearchTerms(terms);
+               break;
 
-               break;
             case 2:
-               allSearchTerms();
-               System.out.println("We did it 2");
+               anySearchTerms(terms);;
                break;
+
             case 3:
                exactPhrase();
-               System.out.println("We did it 3");
                break;
 
             default:
@@ -215,13 +217,46 @@ public class SearchEngine implements MainWindow {
    }
 
    @Override
-   public void allSearchTerms() {
+   public void allSearchTerms(String terms) {
 
    }
 
    @Override
-   public void anySearchTerms() {
-      // TODO Auto-generated method stub
+   public void anySearchTerms(String terms) {
+      ArrayList<String> enteredSearchTerms = new ArrayList<>();
+      Scanner scanner = new Scanner(terms);
+      while(scanner.hasNextLine()){
+         enteredSearchTerms.add(scanner.nextLine());
+
+      }
+
+      for(String x: enteredSearchTerms){
+
+
+         try {
+            for(File y: fc.ArrayListCreator()){
+
+               ArrayList<String> termsInFile = fc.FileToString(y);
+
+               if(termsInFile.contains(x) == true){
+                  System.out.println(y.getName());
+               }
+
+
+
+
+
+
+            }
+
+
+
+
+         } catch (IOException e) {e.printStackTrace();}
+
+      }
+
+
    }
 
    @Override
@@ -235,9 +270,6 @@ public class SearchEngine implements MainWindow {
 
    }
 
-   public boolean ArraySearcher() throws IOException {
 
-      return true;
-   }
 
 }

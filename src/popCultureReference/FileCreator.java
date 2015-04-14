@@ -15,103 +15,82 @@ import java.util.*;
 public class FileCreator {
 
 
-   FileCreator() {
-      System.out.println("File Creator Initialized");
-   }
+    FileCreator() {
+        System.out.println("File Creator Initialized");
+    }
 
-   ///////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////
     /*
     Creates a file in the "File Reference Directory" folder
     Writes the path name of the selected file to the created .txt
     Every time a new file is selected it adds a new path name
      */
-   public void FileWriterAwesome(File myFile) throws IOException {
+    public void FileWriterAwesome(File myFile) throws IOException {
       /*
       Before the path name is written to the .txt file I want
       to check to see if the path name already exists in the .txt.
        */
 
 
+        StringBuilder sb = new StringBuilder();
+        sb.append(myFile.getAbsolutePath());
+        File temp = new File("./File Reference Directory/File Reference.txt");
+        FileWriter writer = new FileWriter(temp, true);
+        writer.write(sb.toString() + "\n");
+        writer.flush();
+    }
+    /////////////////////////////////////////////////////////////
 
-      StringBuilder sb = new StringBuilder();
-      sb.append(myFile.getAbsolutePath());
-      File temp = new File("./File Reference Directory/File Reference.txt");
-      FileWriter writer = new FileWriter(temp, true);
-      writer.write(sb.toString() + "\n");
-      writer.flush();
-   }
-   /////////////////////////////////////////////////////////////
 
-
-   ////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////
     /*
     Reads the reference text
     Takes the path names line by line in the reference text and puts it into a String array
     Then it takes the path names and converts them into File references and places them into a file array
      */
-   public ArrayList<File> ArrayListCreator() throws IOException {
+    public ArrayList<File> ArrayListCreator() throws IOException {
 
-      BufferedReader in = new BufferedReader(new FileReader("./File Reference Directory/File Reference.txt"));
-      String str;
+        BufferedReader in = new BufferedReader(new FileReader("./File Reference Directory/File Reference.txt"));
+        String str;
 
-      List<String> list = new ArrayList<>();
-      ArrayList<File> fileList = new ArrayList<>();
-      while ((str = in.readLine()) != null) {
-         list.add(str);
-      }
+        List<String> list = new ArrayList<>();
+        ArrayList<File> fileList = new ArrayList<>();
+        while ((str = in.readLine()) != null) {
+            list.add(str);
+        }
 
-      for (String x : list) {
+        for (String x : list) {
 
-         File file = new File(x);
-         fileList.add(file);
+            File file = new File(x);
+            fileList.add(file);
 
-      }
-      return fileList;
-   }
-   /////////////////////////////////////////////////////////////////
+        }
+        return fileList;
+    }
+    /////////////////////////////////////////////////////////////////
 
-   /*
-   This methods takes in an arraylist of type File.
-   It then creates a HashMap whose key is of type String and value of type String
-   An enhanced for-loop is used to  iterate through the ArrayList<File> fileArrayList
-   Each index of fileArrayList is stored in File x, read into BufferedReader reader,
-   and then appended to StringBuilder sb.
 
-   Finally, the File name (x.getName();) is stored as the HashMap HashMapper's
-   key and its value as the strings stored in StringBuilder sb stored with one word per a line
+    public ArrayList<String> FileToString(File file) throws IOException {
+        int iterator = 0;
+        ArrayList<String> arrayList = new ArrayList<>();
+        BufferedReader in = new BufferedReader(new FileReader(file));
+        String string = wordSeparator(in.readLine());
+        Scanner scanner = new Scanner(string);
 
-    Method wordSeparator used in wordSeparator(sb.toString()); returns a string that has only one
-    word per a line
+        while (scanner.hasNextLine()) {
+            arrayList.add(iterator, scanner.nextLine());
+            iterator++;
+        }
 
-    hm.put inserts the key and value at that key into our HashMap
 
-    */
-   public HashMap HashMapper(ArrayList<File> fileArrayList) throws IOException {
-      HashMap<File, String> hm = new HashMap<>();
+        return arrayList;
+    }
 
-      for (File x : fileArrayList) {
-         BufferedReader reader = new BufferedReader(new FileReader(x));
-         String line;
-         StringBuilder sb = new StringBuilder();
-         String ls = System.getProperty("line.separator");
-
-         while ((line = reader.readLine()) != null) {
-            sb.append(line);
-            sb.append(ls);
-         }
-
-         hm.put(x, wordSeparator(sb.toString()));
-
-      }
-
-      return hm;
-   }
-
-   //This method takes in a string and changes it
-   //so that there's only one word per a line
-   public String wordSeparator(String str) {
-      return str.replace(' ', '\n');
-   }
+    //This method takes in a string and changes it
+    //so that there's only one word per a line
+    public String wordSeparator(String str) {
+        return str.replace(' ', '\n');
+    }
 
 }
 
