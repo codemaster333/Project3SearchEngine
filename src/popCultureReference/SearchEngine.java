@@ -245,21 +245,5 @@ System.out.println(y.getName());
       // TODO Auto-generated method stub
    }
 
-   @Override
-    public void anySearchTerms(String terms) {
-ArrayList<String> enteredSearchTerms = new ArrayList<>();
-Scanner scanner = new Scanner(terms);
-while(scanner.hasNextLine()){
-enteredSearchTerms.add(scanner.nextLine());
-}
-for(String x: enteredSearchTerms){
-try {
-for(File y: fc.ArrayListCreator()){
-ArrayList<String> termsInFile = fc.FileToString(y);
-if(termsInFile.contains(x) == true){
-System.out.println(y.getName());
-}
-}
-} catch (IOException e) {e.printStackTrace();}
-}
+   
 }
