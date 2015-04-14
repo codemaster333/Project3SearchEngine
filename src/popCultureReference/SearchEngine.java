@@ -221,7 +221,23 @@ public class SearchEngine implements MainWindow {
 
    @Override
    public void anySearchTerms() {
-      // TODO Auto-generated method stub
+       public void anySearchTerms(String terms) {
+ArrayList<String> enteredSearchTerms = new ArrayList<>();
+Scanner scanner = new Scanner(terms);
+while(scanner.hasNextLine()){
+enteredSearchTerms.add(scanner.nextLine());
+}
+for(String x: enteredSearchTerms){
+try {
+for(File y: fc.ArrayListCreator()){
+ArrayList<String> termsInFile = fc.FileToString(y);
+if(termsInFile.contains(x) == true){
+System.out.println(y.getName());
+}
+}
+} catch (IOException e) {e.printStackTrace();}
+}
+}
    }
 
    @Override
@@ -230,48 +246,20 @@ public class SearchEngine implements MainWindow {
    }
 
    @Override
-   public void search(String Terms) {
-     //Untested!!! Please test
- public void anySearchTerms(String terms) {
+    public void anySearchTerms(String terms) {
 ArrayList<String> enteredSearchTerms = new ArrayList<>();
-
-string fileTerms = "";
-
 Scanner scanner = new Scanner(terms);
-
 while(scanner.hasNextLine()){
 enteredSearchTerms.add(scanner.nextLine());
-fileTerms= fileTerms + scanner.nextLine();
 }
-
-
+for(String x: enteredSearchTerms){
 try {
 for(File y: fc.ArrayListCreator()){
-if(fileTerms == terms){
+ArrayList<String> termsInFile = fc.FileToString(y);
+if(termsInFile.contains(x) == true){
 System.out.println(y.getName());
 }
 }
 } catch (IOException e) {e.printStackTrace();}
-
 }
-   }
-
-   public boolean ArraySearcher() throws IOException {
-
-      return true;
-   }
-   
-   public static List searchText(File file, String searchTerm) throws FileNotFoundException { //Untested!!! please test
-		List result = new ArrayList();
-		Scanner scan = new Scanner(file);
-		while (scan.hasNextLine()){
-			String text = scan.nextLine();
-			int indexfound = text.indexOf(searchTerm);
-			if( indexfound > -1){
-				 result.add(file.getName());
-			}
-		}
-		
-		return result;
-
 }
