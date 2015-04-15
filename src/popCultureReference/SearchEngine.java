@@ -27,7 +27,7 @@ interface MainWindow {
 
    void anySearchTerms(String terms);
 
-   void exactPhrase();
+   void exactPhrase(String terms);
 
    void search(String Terms);
 }
@@ -128,13 +128,13 @@ public class SearchEngine implements MainWindow {
       JButton searchButton = new JButton("Search");
       searchBarPanel.add(searchButton);
       searchButton.addActionListener(e -> {
-         String terms = fc.wordSeparator(Normalizer.normalize(searchField.getText(), Normalizer.Form.NFKC));
-         System.out.println(terms);
+         String terms = Normalizer.normalize(searchField.getText(), Normalizer.Form.NFKC);
+
 
          switch (selection) {
             case 1:
                allSearchTerms(terms);
-               textArea.setText("null");
+               //textArea.setText(getsAndSets.getTextAreaDisplayer());
                break;
 
             case 2:
@@ -143,7 +143,7 @@ public class SearchEngine implements MainWindow {
                break;
 
             case 3:
-               exactPhrase();
+               exactPhrase(terms);
                textArea.setText("null");
                break;
 
@@ -222,6 +222,85 @@ public class SearchEngine implements MainWindow {
 
    @Override
    public void allSearchTerms(String terms) {
+      terms = fc.wordSeparator(terms);
+      HashSet<String> isInFile = new HashSet<>();
+      ArrayList<String> enteredSearchTerms = new ArrayList<>();
+      Scanner scanner = new Scanner(terms);
+      while (scanner.hasNextLine()) {
+         enteredSearchTerms.add(scanner.nextLine());
+
+      }
+
+      System.out.println(enteredSearchTerms);
+
+      for (String x : enteredSearchTerms) {
+
+
+         try {
+            for (File y : fc.ArrayListCreator()) {
+
+               ArrayList<String> termsInFile = fc.FileToString(y);
+
+               if (termsInFile.contains(x) == true) {
+                  isInFile.add(y.getName());
+               }
+
+            }
+
+
+
+         } catch (IOException e) {
+            e.printStackTrace();
+         }
+
+      }
+
+      System.out.println("orsearch:"+ isInFile);
+
+      for (String x : enteredSearchTerms) {
+
+         StringBuilder sb = new StringBuilder();
+         try {
+            for (File y : fc.ArrayListCreator()) {
+               ArrayList<String> termsInFile = fc.FileToString(y);
+
+               for (String string : termsInFile) {
+                  sb.append(string + "\n");
+               }
+
+            }
+
+
+            ArrayList<String> al = new ArrayList<>();
+            String s = sb.toString();
+            int it = 0;
+
+
+            Scanner sc = new Scanner(s);
+
+            while (sc.hasNextLine()) {
+               al.add(it, sc.nextLine());
+               it++;
+            }
+
+            System.out.println("Contents of ArrayList:" + al);
+
+            for (File y : fc.ArrayListCreator()) {
+
+               ArrayList<String> ese = fc.FileToString(y);
+
+               if (ese.contains(x) == false) {
+                  isInFile.remove(y.getName());
+               }
+
+            }
+
+         } catch (Exception e) {System.out.println("Exception");}
+
+
+      }
+
+      System.out.println("And:" + isInFile);
 
 
 
@@ -229,6 +308,7 @@ public class SearchEngine implements MainWindow {
 
    @Override
    public void anySearchTerms(String terms) {
+      terms = fc.wordSeparator(terms);
       HashSet<String> isInFile = new HashSet<>();
       ArrayList<String> enteredSearchTerms = new ArrayList<>();
       Scanner scanner = new Scanner(terms);
@@ -248,6 +328,7 @@ public class SearchEngine implements MainWindow {
                if (termsInFile.contains(x) == true) {
                   isInFile.add(y.getName());
                }
+
             }
 
          } catch (IOException e) {
@@ -255,15 +336,16 @@ public class SearchEngine implements MainWindow {
          }
 
       }
-
       getsAndSets.setContainsTheWord(isInFile);
       getsAndSets.setTextAreaDisplayer(fc.changeHashSetIntoText(getsAndSets.getContainsTheWord()));
 
    }
 
    @Override
-   public void exactPhrase() {
+   public void exactPhrase(String terms) {
       // TODO Auto-generated method stub
+
+
    }
 
    @Override

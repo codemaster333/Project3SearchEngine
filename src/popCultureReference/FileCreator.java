@@ -103,7 +103,7 @@ public class FileCreator {
          sb.append(x + "\n");
       }
 
-      System.out.println(sb);
+
 
       String string = sb.toString();
 
@@ -111,6 +111,8 @@ public class FileCreator {
       return string;
 
    }
+
+
 
    //This method takes in a string and changes it
    //so that there's only one word per a line
