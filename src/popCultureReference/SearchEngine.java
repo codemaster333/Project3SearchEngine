@@ -2,8 +2,8 @@ package popCultureReference;
 
 /* Search Engine created by Group Pop Culture Reference
  *
- * Comprising of Jordan Hart, Brannon Centeno, Kish Moore
- * and Alexis Herrera.
+ * Comprising of Jordan Hart, Brannon Centeno, Kish Moore,
+ * Steven B,  Alexis Herrera.
 */
 
 
@@ -133,7 +133,7 @@ public class SearchEngine implements MainWindow {
          switch (selection) {
             case 1:
                allSearchTerms(terms);
-               //textArea.setText(getsAndSets.getTextAreaDisplayer());
+               textArea.setText(getsAndSets.getTextAreaDisplayer());
                break;
 
             case 2:
@@ -143,7 +143,7 @@ public class SearchEngine implements MainWindow {
 
             case 3:
                exactPhrase(terms);
-               textArea.setText("null");
+               textArea.setText(getsAndSets.getTextAreaDisplayer());
                break;
 
             default:
@@ -197,6 +197,7 @@ public class SearchEngine implements MainWindow {
 
       frame.getContentPane().add(searchTypePanel, BorderLayout.SOUTH);
 
+      /*ActionListeners for the Radio Buttons, which change the output*/
       allSearchTermButton.addActionListener(e -> {
          selection = 1;
          System.out.println("All Search Activated");
@@ -219,6 +220,13 @@ public class SearchEngine implements MainWindow {
 
    }
 
+   /* allSearchTerms method takes in the terms from the Search Bar, compares it to the
+    * ArrayList containing each word from the files uploaded by the user in the Maintenance
+    * menu.
+    *
+    * The method compares the search terms to the files based on whether all of the search
+    * terms appear in the files, but does not take into account their order.
+    */
    @Override
    public void allSearchTerms(String terms) {
       terms = fc.wordSeparator(terms);
@@ -231,6 +239,7 @@ public class SearchEngine implements MainWindow {
       }
 
       System.out.println(enteredSearchTerms);
+
 
       for (String x : enteredSearchTerms) {
 
@@ -301,9 +310,18 @@ public class SearchEngine implements MainWindow {
 
       System.out.println("And:" + isInFile);
 
-
+      getsAndSets.setContainsTheWord(isInFile);
+      getsAndSets.setTextAreaDisplayer(fc.changeHashSetIntoText(getsAndSets.getContainsTheWord()));
 
    }
+
+   /* anySearchTerms method takes in the terms from the Search Bar, compares it to the
+   * ArrayList containing each word from the files uploaded by the user in the Maintenance
+   * menu.
+   *
+   * The method compares the search terms to the files based on whether they appear in the files
+   * and does not take into account any kind of order.
+   */
 
    @Override
    public void anySearchTerms(String terms) {
@@ -339,6 +357,14 @@ public class SearchEngine implements MainWindow {
       getsAndSets.setTextAreaDisplayer(fc.changeHashSetIntoText(getsAndSets.getContainsTheWord()));
 
    }
+
+   /* exactPhrase method takes in the terms from the Search Bar, compares it to the
+    * ArrayList containing each word from the files uploaded by the user in the Maintenance
+    * menu.
+    *
+    * The method compares the search terms to the files based on whether all of the search
+    * terms appear in the files and the order in which they appear.
+    */
 
    @Override
    public void exactPhrase(String terms) {

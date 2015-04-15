@@ -116,12 +116,15 @@ public class MaintenanceGUI implements MaintanceInterface {
 
    }
 
+   /* Rebuilds/Refreshes the files in the maintenance menu, based on whether
+    * or not there have been changes to the files */
    @Override
    public void rebuildData() {
       // TODO Auto-generated method stub
 
    }
 
+   /* Removes selected files from the Maintenance menu*/
    @Override
    public void removeFile() {
       // TODO Auto-generated method stub
