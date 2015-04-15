@@ -5,6 +5,8 @@ import java.util.HashSet;
 /**
  * Created by brannon on 4/14/15.
  */
+
+/*Method gets and sets the phrase matches for the Search Terms */
 public class GetsAndSets {
 
    HashSet<String> containsTheWord = new HashSet<>();
