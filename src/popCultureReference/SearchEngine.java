@@ -113,7 +113,6 @@ public class SearchEngine implements MainWindow {
 
       frame.getContentPane().setLayout(new BorderLayout(0, 0));
       ///////////////////////////////////////////////////////////////////////////////
-
 		/* Top Bar */
 
       JPanel searchBarPanel = new JPanel();
@@ -122,7 +121,7 @@ public class SearchEngine implements MainWindow {
       JLabel searchLabel = new JLabel("Search Terms");
       searchBarPanel.add(searchLabel);
 
-      JTextField searchField = new JTextField(" ", 28);
+      JTextField searchField = new JTextField("", 28);
       searchBarPanel.add(searchField);
 
       JButton searchButton = new JButton("Search");
