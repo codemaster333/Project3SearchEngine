@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
@@ -86,8 +87,7 @@ public class MaintenanceGUI implements MaintanceInterface {
       deleteFileButton.addActionListener(e -> removeFile());
 
 
-      rebuildFileButton.addActionListener(e -> {
-      });
+      rebuildFileButton.addActionListener(e -> rebuildData());
 
    }
 
@@ -170,8 +170,37 @@ public class MaintenanceGUI implements MaintanceInterface {
     * or not there have been changes to the files */
    @Override
    public void rebuildData() {
-      // TODO Auto-generated method stub
+      try {
+         String str;
+         BufferedReader in = new BufferedReader(new FileReader("./File Reference Directory/File Reference.txt"));
+         ArrayList<String> list = new ArrayList<>();
+         while ((str = in.readLine()) != null) {
+            list.add(str);
+         }
 
+         for(File x: fc.ArrayListCreator()){
+            if(!x.exists()){
+               list.remove(x.getPath());
+            }
+         }
+
+         StringBuilder sb = new StringBuilder();
+         for(String x: list){
+            sb.append(x+"\n");
+         }
+
+         Path path = Paths.get("./File Reference Directory/File Reference.txt");
+         Files.delete(path);
+
+         File temp = new File("./File Reference Directory/File Reference.txt");
+         FileWriter writer = new FileWriter(temp, true);
+         writer.write(sb.toString() + "\n");
+         writer.flush();
+
+         frame.dispose();
+         initialize();
+
+      }catch(Exception e){e.printStackTrace();}
    }
 
    /* Removes selected files from the Maintenance menu*/
@@ -183,7 +212,7 @@ public class MaintenanceGUI implements MaintanceInterface {
          fc.FileObliterator(selectedPath);
          frame.dispose();
          initialize();
-         
+
       } catch (IOException e) {
          e.printStackTrace();
       }
