@@ -72,24 +72,21 @@ public class MaintenanceGUI implements MaintanceInterface {
       final DefaultListModel model = new DefaultListModel();
 
       JPanel top = new JPanel();
-      //JList list = new JList(readContent.toArray());
-      JList list = new JList(model);
-      String foo[] = {"foo"};
-      model.addElement(foo[0]); //This is how you add stuff to JList. Remove is
-      //model.removeElementAt(model.getSize() - 1);
-
+      JList list = new JList(fc.stringFling(fc.ArrayListCreator()).toArray(new String[fc.stringFling(fc.ArrayListCreator()).size()]));
+      list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
       JScrollPane listScroller = new JScrollPane(list);
-      listScroller.setPreferredSize(new Dimension(600, 350));
+      listScroller.setPreferredSize(new Dimension (600,350));
       top.add(listScroller);
 
-      class MutableList extends JList{
-         MutableList(){
-            super(new DefaultListModel());
-         }
-         DefaultListModel getContents(){
-            return (DefaultListModel)getModel();
-         }
-      }
+      list.addListSelectionListener(
+              new ListSelectionListener(){
+                 @Override
+                 public void valueChanged(ListSelectionEvent e) {
+
+                 }
+              }
+      );
+
 
 
       frame.add(top, BorderLayout.CENTER);
@@ -128,28 +125,28 @@ public class MaintenanceGUI implements MaintanceInterface {
 
 
 
-         JFileChooser chooser = new JFileChooser();
-         FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files Only", "txt");
-         chooser.setFileFilter(filter);
-         if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            File chosenFile = chooser.getSelectedFile();
-            StringBuilder sb = new StringBuilder(chosenFile.getName());
+      JFileChooser chooser = new JFileChooser();
+      FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files Only", "txt");
+      chooser.setFileFilter(filter);
+      if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+         File chosenFile = chooser.getSelectedFile();
+         StringBuilder sb = new StringBuilder(chosenFile.getName());
 
 
-            if (!sb.subSequence(sb.length() - 4, sb.length()).equals(".txt")) {
-               JOptionPane.showMessageDialog(null, "Only text files with the extension '.txt' can be selected.\nClose this dialog box and try again");
+         if (!sb.subSequence(sb.length() - 4, sb.length()).equals(".txt")) {
+            JOptionPane.showMessageDialog(null, "Only text files with the extension '.txt' can be selected.\nClose this dialog box and try again");
 
-            } else {
+         } else {
 
 
-               try {
-                  fc.FileWriterAwesome(chosenFile);
-               } catch (IOException e) {
-                  e.printStackTrace();
-               }
+            try {
+               fc.FileWriterAwesome(chosenFile);
+            } catch (IOException e) {
+               e.printStackTrace();
             }
-            
          }
+
+      }
 
    }
 
