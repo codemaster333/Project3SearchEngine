@@ -11,6 +11,15 @@ public class GetsAndSets {
 
    HashSet<String> containsTheWord = new HashSet<>();
    String textAreaDisplayer;
+   private static int selection;
+
+   public int getSelection() {
+      return selection;
+   }
+
+   public void setSelection(int selection) {
+      this.selection = selection;
+   }
 
    public HashSet<String> getContainsTheWord() {
       return containsTheWord;

@@ -3,7 +3,9 @@ package popCultureReference;
 import sun.java2d.pipe.SpanShapeRenderer;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -40,6 +42,29 @@ public class FileCreator {
       writer.flush();
    }
    /////////////////////////////////////////////////////////////
+
+   public void FileObliterator(String name) throws IOException{
+      String str;
+      BufferedReader in = new BufferedReader(new FileReader("./File Reference Directory/File Reference.txt"));
+      ArrayList<String> list = new ArrayList<>();
+      while((str = in.readLine()) != null){
+         list.add(str);
+      }
+
+      list.remove(name);
+      StringBuilder sb = new StringBuilder();
+      for(String x: list){
+         sb.append(x+"\n");
+      }
+
+      Path path = Paths.get("./File Reference Directory/File Reference.txt");
+
+      Files.delete(path);
+      File temp = new File("./File Reference Directory/File Reference.txt");
+      FileWriter writer = new FileWriter(temp, true);
+      writer.write(sb.toString());
+      writer.flush();
+   }
 
 
    ////////////////////////////////////////////////////////////////////////

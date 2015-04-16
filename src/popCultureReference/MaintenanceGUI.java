@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -26,7 +27,7 @@ interface MaintanceInterface {
 
    void rebuildData();
 
-   void removeFile();
+   //void removeFile();
 
 }
 
@@ -35,6 +36,13 @@ public class MaintenanceGUI implements MaintanceInterface {
 
    private FileCreator fc = new FileCreator();
    private JFrame frame;
+   private JTable table;
+   String[][] data;
+   BorderLayout borderLayout = new BorderLayout();
+   private DefaultTableModel defaultTableModel = new DefaultTableModel();
+   GetsAndSets getsAndSets = new GetsAndSets();
+   ListSelectionModel listSelectionModel;
+   String[] columnName = {"Path Name", "Last Modified"};
 
 
    MaintenanceGUI() {
@@ -55,7 +63,7 @@ public class MaintenanceGUI implements MaintanceInterface {
       // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.setVisible(true);
       frame.setResizable(false);
-      frame.setLayout(new BorderLayout());
+      frame.setLayout(borderLayout);
 
       // South Buttons
       JPanel bottom = new JPanel();
@@ -65,47 +73,48 @@ public class MaintenanceGUI implements MaintanceInterface {
       bottom.add(addFileButton);
       bottom.add(deleteFileButton);
       bottom.add(rebuildFileButton);
-      frame.add(bottom, BorderLayout.SOUTH);
+      frame.add(bottom, borderLayout.SOUTH);
       // South Button ActionListeners
 
+      JTable();
 
-      final DefaultListModel model = new DefaultListModel();
-
-      JPanel top = new JPanel();
-      JList list = new JList(fc.stringFling(fc.ArrayListCreator()).toArray(new String[fc.stringFling(fc.ArrayListCreator()).size()]));
-      list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-      JScrollPane listScroller = new JScrollPane(list);
-      listScroller.setPreferredSize(new Dimension (600,350));
-      top.add(listScroller);
-
-      list.addListSelectionListener(
-              new ListSelectionListener(){
-                 @Override
-                 public void valueChanged(ListSelectionEvent e) {
-
-                 }
-              }
-      );
-
-
-
-      frame.add(top, BorderLayout.CENTER);
 
       //South Button ActionListeners
       addFileButton.addActionListener(e -> addFile());
 
 
-      deleteFileButton.addActionListener(e -> dummy());
+      deleteFileButton.addActionListener(e -> removeFile());
 
 
-      rebuildFileButton.addActionListener(e -> dummy());
+      rebuildFileButton.addActionListener(e -> {
+      });
 
    }
 
+   public void JTable() {
+      JPanel top = new JPanel();
+      try {
+         data = updateData();
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+      table = new JTable(data, columnName);
+      JScrollPane scrollPane = new JScrollPane(table);
+      defaultTableModel.fireTableDataChanged();
+      Dimension dimension = new Dimension(599, 399);
+      scrollPane.setPreferredSize(dimension);
+      top.add(scrollPane);
+      frame.add(top, borderLayout.CENTER);
 
+      listSelectionModel = table.getSelectionModel();
+      listSelectionModel.addListSelectionListener(e -> {
+         if (e.getValueIsAdjusting()) {
+            getsAndSets.setSelection(listSelectionModel.getLeadSelectionIndex());
 
+         }
+      });
 
-
+   }
 
 
    /*
@@ -124,7 +133,6 @@ public class MaintenanceGUI implements MaintanceInterface {
    public void addFile() {
 
 
-
       JFileChooser chooser = new JFileChooser();
       FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files Only", "txt");
       chooser.setFileFilter(filter);
@@ -138,16 +146,24 @@ public class MaintenanceGUI implements MaintanceInterface {
 
          } else {
 
-
             try {
-               fc.FileWriterAwesome(chosenFile);
+               if (fc.ArrayListCreator().contains(chosenFile)) {
+                  JOptionPane.showMessageDialog(null, "That file has already been indexed");
+
+               } else {
+
+                  fc.FileWriterAwesome(chosenFile);
+                  frame.dispose();
+                  initialize();
+
+
+               }
             } catch (IOException e) {
                e.printStackTrace();
             }
+
          }
-
       }
-
    }
 
    /* Rebuilds/Refreshes the files in the maintenance menu, based on whether
@@ -159,15 +175,37 @@ public class MaintenanceGUI implements MaintanceInterface {
    }
 
    /* Removes selected files from the Maintenance menu*/
-   @Override
+
    public void removeFile() {
-      // TODO Auto-generated method stub
+      System.out.println(getsAndSets.getSelection());
+      try {
+         String selectedPath = updateData()[getsAndSets.getSelection()][0];
+         fc.FileObliterator(selectedPath);
+         frame.dispose();
+         initialize();
+         
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+
 
    }
 
-   public void dummy() {
-      System.out.println("Dummy");
+   public String[][] updateData() throws IOException {
+      SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+      int iterator = 0;
+
+
+      String[][] data = new String[fc.ArrayListCreator().size()][2];
+      if (fc.ArrayListCreator().isEmpty()) {
+      } else {
+         for (File x : fc.ArrayListCreator()) {
+            data[iterator][0] = x.getPath();
+            data[iterator][1] = sdf.format(x.lastModified());
+            iterator++;
+         }
+      }
+
+      return data;
    }
-
-
 }
