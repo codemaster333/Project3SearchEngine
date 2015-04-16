@@ -120,6 +120,15 @@ public class FileCreator {
       return str.replace(' ', '\n');
    }
 
+   public ArrayList<String> stringFling(ArrayList<File> fileArrayList) throws IOException {
+      SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+      ArrayList<String> stringArrayList = new ArrayList<>();
+      int iterator = 0;
+      for (File x : fileArrayList) {
+         stringArrayList.add(iterator, "Name: " + x.getName() + "\nPath: " + x.getAbsolutePath() + "\nLast Modified: " + sdf.format(x.lastModified()));
+         iterator++;
+      }
+
+      return stringArrayList;
+   }
 }
-
-
