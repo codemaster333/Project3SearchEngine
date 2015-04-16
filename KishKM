@@ -1,0 +1,37 @@
+public String AndSearch ( termOne termTwo termThree ) // This assumes someone can search for up to three terms at once. A search for fewer terms should result in "" being passed to the unused terms.
+		{
+		    double count = 0,countBuffer=0,countLine=0;
+		    String filePath = "x.txt"; //This should be something other than x, depending on where we're storing the files.
+		    String inputSearch = searchTerm; 
+		    String compare = "";
+
+		    try {
+		    	while (termThree != "")
+		    	{
+		    			Scanner s = new Scanner(file.in);
+		    			compare = s.next;
+		    			while ((compare != null) && (compare != TermThree)
+		    					compare = s.next;
+		    			if (compare = null)
+		    				return termThree + "Not Found";
+		    	}
+		    	while (termTwo != "")
+		    	{
+		    			Scanner s = new Scanner(file.in);
+		    			compare = s.next;
+		    			while ((compare != null) && (compare != termTwo)
+		    					compare = s.next;
+		    			if (compare = null)
+		    				return termTwo + "Not Found";
+		    	}
+		    	Scanner s = new Scanner(file.in);
+    			compare = s.next;
+    			while ((compare != null) && (compare != termOne)
+    					compare = s.next;
+    			if (compare = null)
+    				return termOne + "Not Found";
+    			else
+    				return termOne + "," + termTwo + ", and" + termThree + "found";
+    			
+		}
+		}
