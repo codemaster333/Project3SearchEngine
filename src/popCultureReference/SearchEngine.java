@@ -143,7 +143,8 @@ public class SearchEngine implements MainWindow {
 
             case 3:
                exactPhrase(terms);
-               textArea.setText(getsAndSets.getTextAreaDisplayer());
+
+               //textArea.setText(getsAndSets.getTextAreaDisplayer());
                break;
 
             default:
@@ -350,7 +351,38 @@ public class SearchEngine implements MainWindow {
 
    @Override
    public void exactPhrase(String terms) {
-      // TODO Auto-generated method stub
+
+      try {
+         int iterator = 0;
+         ArrayList<String> exactPhrasesFromFile = new ArrayList<>();
+
+         StringBuilder sb = new StringBuilder();
+
+         for(File x: fc.ArrayListCreator()){
+            BufferedReader in = new BufferedReader(new FileReader(x));
+            String line;
+
+            while ((line = in.readLine()) != null) {
+               sb.append(line + " ");
+            }
+
+            exactPhrasesFromFile.add(iterator, sb.toString());
+            iterator++;
+         }
+
+         //
+
+
+
+
+
+
+
+
+
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
 
 
    }
