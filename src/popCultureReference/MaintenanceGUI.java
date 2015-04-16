@@ -1,11 +1,23 @@
 package popCultureReference;
 
 
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Scanner;
 
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.JFileChooser;
+import javax.swing.table.DefaultTableModel;
 
 interface MaintanceInterface {
 
@@ -35,25 +47,17 @@ public class MaintenanceGUI implements MaintanceInterface {
    }
 
    public void initialize() throws IOException {
-      //table data initialization
+      // table data initialization
       frame = new JFrame();
       frame.setTitle("Maintenance");
       frame.setBounds(100, 100, 600, 400);
       frame.setResizable(false);
-      //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.setVisible(true);
       frame.setResizable(false);
       frame.setLayout(new BorderLayout());
-    
 
-
-      JTable table = new JTable();
-      table.setRowHeight(30); //Will probably be the length of the array or something
-      JScrollPane scrollPane = new JScrollPane(table);
-      frame.add(scrollPane, BorderLayout.CENTER);
-
-
-      //South Buttons
+      // South Buttons
       JPanel bottom = new JPanel();
       JButton addFileButton = new JButton("Add File");
       JButton deleteFileButton = new JButton("Delete File");
@@ -62,7 +66,33 @@ public class MaintenanceGUI implements MaintanceInterface {
       bottom.add(deleteFileButton);
       bottom.add(rebuildFileButton);
       frame.add(bottom, BorderLayout.SOUTH);
+      // South Button ActionListeners
 
+
+      final DefaultListModel model = new DefaultListModel();
+
+      JPanel top = new JPanel();
+      //JList list = new JList(readContent.toArray());
+      JList list = new JList(model);
+      String foo[] = {"foo"};
+      model.addElement(foo[0]); //This is how you add stuff to JList. Remove is
+      //model.removeElementAt(model.getSize() - 1);
+
+      JScrollPane listScroller = new JScrollPane(list);
+      listScroller.setPreferredSize(new Dimension(600, 350));
+      top.add(listScroller);
+
+      class MutableList extends JList{
+         MutableList(){
+            super(new DefaultListModel());
+         }
+         DefaultListModel getContents(){
+            return (DefaultListModel)getModel();
+         }
+      }
+
+
+      frame.add(top, BorderLayout.CENTER);
 
       //South Button ActionListeners
       addFileButton.addActionListener(e -> addFile());
@@ -74,6 +104,11 @@ public class MaintenanceGUI implements MaintanceInterface {
       rebuildFileButton.addActionListener(e -> dummy());
 
    }
+
+
+
+
+
 
 
    /*
@@ -100,8 +135,9 @@ public class MaintenanceGUI implements MaintanceInterface {
             File chosenFile = chooser.getSelectedFile();
             StringBuilder sb = new StringBuilder(chosenFile.getName());
 
+
             if (!sb.subSequence(sb.length() - 4, sb.length()).equals(".txt")) {
-               JOptionPane.showMessageDialog(null, "Only text files with the extension '.txt' can be selected.\nClose this dialog box and try again, fool!");
+               JOptionPane.showMessageDialog(null, "Only text files with the extension '.txt' can be selected.\nClose this dialog box and try again");
 
             } else {
 
@@ -112,6 +148,7 @@ public class MaintenanceGUI implements MaintanceInterface {
                   e.printStackTrace();
                }
             }
+            
          }
 
    }
