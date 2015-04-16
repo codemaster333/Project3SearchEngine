@@ -240,30 +240,12 @@ public class SearchEngine implements MainWindow {
 
       System.out.println(enteredSearchTerms);
 
+      try {
+         for(File x: fc.ArrayListCreator()){
+            isInFile.add(x.getName());
 
-      for (String x : enteredSearchTerms) {
-
-
-         try {
-            for (File y : fc.ArrayListCreator()) {
-
-               ArrayList<String> termsInFile = fc.FileToString(y);
-
-               if (termsInFile.contains(x) == true) {
-                  isInFile.add(y.getName());
-               }
-
-            }
-
-
-
-         } catch (IOException e) {
-            e.printStackTrace();
          }
-
-      }
-
-      System.out.println("orsearch:"+ isInFile);
+      } catch (IOException e) {e.printStackTrace();}
 
       for (String x : enteredSearchTerms) {
 
