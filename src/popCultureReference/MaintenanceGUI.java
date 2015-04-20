@@ -162,6 +162,7 @@ public class MaintenanceGUI implements MaintanceInterface {
     * or not there have been changes to the files */
    @Override
    public void rebuildData() {
+
       try {
          if (!fc.ArrayListCreator().isEmpty()) {
 
@@ -179,19 +180,23 @@ public class MaintenanceGUI implements MaintanceInterface {
                }
             }
 
-            list.trimToSize();
+
+
+
 
             StringBuilder sb = new StringBuilder();
             for (String x : list) {
                sb.append(x + "\n");
             }
 
+
+
             Path path = Paths.get("./File Reference Directory/File Reference.txt");
             Files.delete(path);
 
             File temp = new File("./File Reference Directory/File Reference.txt");
             FileWriter writer = new FileWriter(temp, true);
-            writer.write(sb.toString() + "\n");
+            writer.write(sb.toString());
             writer.flush();
 
             frame.dispose();
@@ -207,11 +212,12 @@ public class MaintenanceGUI implements MaintanceInterface {
 
    public void removeFile() {
       try {
-         if (!fc.ArrayListCreator().isEmpty()) {
+         if (!fc.ArrayListCreator().isEmpty()){
 
             System.out.println(getsAndSets.getSelection());
 
             String selectedPath = updateData()[getsAndSets.getSelection()][0];
+            getsAndSets.setSelection(-1);
             fc.FileObliterator(selectedPath);
             frame.dispose();
             initialize();
