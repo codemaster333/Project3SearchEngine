@@ -2,21 +2,13 @@ package popCultureReference;
 
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Scanner;
-
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
@@ -28,8 +20,7 @@ interface MaintanceInterface {
 
    void rebuildData();
 
-   //void removeFile();
-   //
+   void removeFile();
 
 }
 
@@ -39,12 +30,12 @@ public class MaintenanceGUI implements MaintanceInterface {
    private FileCreator fc = new FileCreator();
    private JFrame frame;
    private JTable table;
-   String[][] data;
-   BorderLayout borderLayout = new BorderLayout();
+   private String[][] data;
+   private BorderLayout borderLayout = new BorderLayout();
    private DefaultTableModel defaultTableModel = new DefaultTableModel();
-   GetsAndSets getsAndSets = new GetsAndSets();
-   ListSelectionModel listSelectionModel;
-   String[] columnName = {"Path Name", "Last Modified"};
+   private GetsAndSets getsAndSets = new GetsAndSets();
+   private ListSelectionModel listSelectionModel;
+   private String[] columnName = {"Path Name", "Last Modified"};
 
 
    MaintenanceGUI() {
@@ -179,15 +170,15 @@ public class MaintenanceGUI implements MaintanceInterface {
             list.add(str);
          }
 
-         for(File x: fc.ArrayListCreator()){
-            if(!x.exists()){
+         for (File x : fc.ArrayListCreator()) {
+            if (!x.exists()) {
                list.remove(x.getPath());
             }
          }
 
          StringBuilder sb = new StringBuilder();
-         for(String x: list){
-            sb.append(x+"\n");
+         for (String x : list) {
+            sb.append(x + "\n");
          }
 
          Path path = Paths.get("./File Reference Directory/File Reference.txt");
@@ -201,7 +192,9 @@ public class MaintenanceGUI implements MaintanceInterface {
          frame.dispose();
          initialize();
 
-      }catch(Exception e){e.printStackTrace();}
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
    }
 
    /* Removes selected files from the Maintenance menu*/

@@ -33,7 +33,6 @@ public class FileCreator {
       to check to see if the path name already exists in the .txt.
        */
 
-
       StringBuilder sb = new StringBuilder();
       sb.append(myFile.getAbsolutePath());
       File temp = new File("./File Reference Directory/File Reference.txt");
@@ -43,18 +42,18 @@ public class FileCreator {
    }
    /////////////////////////////////////////////////////////////
 
-   public void FileObliterator(String name) throws IOException{
+   public void FileObliterator(String name) throws IOException {
       String str;
       BufferedReader in = new BufferedReader(new FileReader("./File Reference Directory/File Reference.txt"));
-      ArrayList<String> list = new ArrayList<>();
-      while((str = in.readLine()) != null){
+      List<String> list = new ArrayList<>();
+      while ((str = in.readLine()) != null) {
          list.add(str);
       }
 
       list.remove(name);
       StringBuilder sb = new StringBuilder();
-      for(String x: list){
-         sb.append(x+"\n");
+      for (String x : list) {
+         sb.append(x + "\n");
       }
 
       Path path = Paths.get("./File Reference Directory/File Reference.txt");
@@ -73,13 +72,13 @@ public class FileCreator {
     Takes the path names line by line in the reference text and puts it into a String array
     Then it takes the path names and converts them into File references and places them into a file array
      */
-   public ArrayList<File> ArrayListCreator() throws IOException {
+   public List<File> ArrayListCreator() throws IOException {
 
       BufferedReader in = new BufferedReader(new FileReader("./File Reference Directory/File Reference.txt"));
       String str;
 
       List<String> list = new ArrayList<>();
-      ArrayList<File> fileList = new ArrayList<>();
+      List<File> fileList = new ArrayList<>();
       while ((str = in.readLine()) != null) {
          list.add(str);
       }
@@ -97,10 +96,10 @@ public class FileCreator {
    /////////////////////////////////////////////////////////////////
 
 
-   public ArrayList<String> FileToString(File file) throws IOException {
+   public List<String> FileToString(File file) throws IOException {
       StringBuilder sb = new StringBuilder();
       int iterator = 0;
-      ArrayList<String> arrayList = new ArrayList<>();
+      List<String> arrayList = new ArrayList<>();
       BufferedReader in = new BufferedReader(new FileReader(file));
       String line;
 
@@ -122,12 +121,11 @@ public class FileCreator {
       return arrayList;
    }
 
-   public String changeHashSetIntoText(HashSet<String> hs) {
+   public String changeHashSetIntoText(Set<String> hs) {
       StringBuilder sb = new StringBuilder();
       for (String x : hs) {
          sb.append(x + "\n");
       }
-
 
 
       String string = sb.toString();
@@ -136,30 +134,6 @@ public class FileCreator {
       return string;
 
    }
-
-   public ArrayList<String> HashMapExplosion(File file) throws Exception{
-      ArrayList<String> toBeReturned = new ArrayList<>();
-      BufferedReader in = new BufferedReader(new FileReader(file));
-      String str;
-
-      StringBuilder sb = new StringBuilder();
-
-      while ((str = in.readLine()) != null) {
-         sb.append(str + " ");
-      }
-
-
-      Scanner sc = new Scanner(wordSeparator(sb.toString()));
-      int iterator = 0;
-      while(sc.hasNextLine()){
-         toBeReturned.add(iterator, sc.nextLine());
-      }
-
-
-      return toBeReturned;
-
-   }
-
 
 
    //This method takes in a string and changes it

@@ -29,7 +29,6 @@ interface MainWindow {
 
    void exactPhrase(String terms);
 
-   void search(String Terms);
 }
 
 
@@ -37,9 +36,9 @@ public class SearchEngine implements MainWindow {
 
    private JFrame frame;
    private int selection;
-   FileCreator fc = new FileCreator();
-   JTextArea textArea;
-   GetsAndSets getsAndSets = new GetsAndSets();
+   private FileCreator fc = new FileCreator();
+   private JTextArea textArea;
+   private GetsAndSets getsAndSets = new GetsAndSets();
 
 
    /**
@@ -113,7 +112,7 @@ public class SearchEngine implements MainWindow {
 
       frame.getContentPane().setLayout(new BorderLayout(0, 0));
       ///////////////////////////////////////////////////////////////////////////////
-		/* Top Bar */
+      /* Top Bar */
 
       JPanel searchBarPanel = new JPanel();
       frame.getContentPane().add(searchBarPanel, BorderLayout.NORTH);
@@ -231,7 +230,7 @@ public class SearchEngine implements MainWindow {
    @Override
    public void allSearchTerms(String terms) {
       terms = fc.wordSeparator(terms);
-      HashSet<String> isInFile = new HashSet<>();
+      Set<String> isInFile = new HashSet<>();
       ArrayList<String> enteredSearchTerms = new ArrayList<>();
       Scanner scanner = new Scanner(terms);
       while (scanner.hasNextLine()) {
@@ -242,18 +241,20 @@ public class SearchEngine implements MainWindow {
       System.out.println(enteredSearchTerms);
 
       try {
-         for(File x: fc.ArrayListCreator()){
+         for (File x : fc.ArrayListCreator()) {
             isInFile.add(x.getName());
 
          }
-      } catch (IOException e) {e.printStackTrace();}
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
 
       for (String x : enteredSearchTerms) {
 
          StringBuilder sb = new StringBuilder();
          try {
             for (File y : fc.ArrayListCreator()) {
-               ArrayList<String> termsInFile = fc.FileToString(y);
+               List<String> termsInFile = fc.FileToString(y);
 
                for (String string : termsInFile) {
                   sb.append(string + "\n");
@@ -278,7 +279,7 @@ public class SearchEngine implements MainWindow {
 
             for (File y : fc.ArrayListCreator()) {
 
-               ArrayList<String> ese = fc.FileToString(y);
+               List<String> ese = fc.FileToString(y);
 
                if (ese.contains(x) == false) {
                   isInFile.remove(y.getName());
@@ -286,7 +287,9 @@ public class SearchEngine implements MainWindow {
 
             }
 
-         } catch (Exception e) {System.out.println("Exception");}
+         } catch (Exception e) {
+            System.out.println("Exception");
+         }
 
 
       }
@@ -323,7 +326,7 @@ public class SearchEngine implements MainWindow {
          try {
             for (File y : fc.ArrayListCreator()) {
 
-               ArrayList<String> termsInFile = fc.FileToString(y);
+               List<String> termsInFile = fc.FileToString(y);
 
                if (termsInFile.contains(x) == true) {
                   isInFile.add(y.getName());
@@ -351,66 +354,8 @@ public class SearchEngine implements MainWindow {
 
    @Override
    public void exactPhrase(String terms) {
-      try {
-         int iterator = 0;
-         String separated = fc.wordSeparator(terms);
-         ArrayList<String> separatedTerms = new ArrayList<>();
-         HashMap<String, ArrayList<String>> shitContainter = new HashMap<>();
 
-
-         Scanner sc = new Scanner(separated);
-
-         while(sc.hasNextLine()){
-            separatedTerms.add(0, sc.nextLine());
-            iterator++;
-         }
-
-         int iterator2 = 0;
-
-         for(File x: fc.ArrayListCreator()){
-            try {
-               shitContainter.put(x.getName(), fc.HashMapExplosion(x));
-            } catch (Exception e) {e.printStackTrace();}
-
-         }
-
-         for(String x: separatedTerms){
-
-            if(shitContainter.containsValue(x)){
-
-               System.out.println("The word contained is" + x);
-
-            }
-
-
-
-         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      } catch (IOException e) {
-         e.printStackTrace();
-      }
-
-
-   }
-
-   @Override
-   public void search(String Terms) {
-      // TODO Auto-generated method stub
+      System.out.println("Still not functional");
 
    }
 

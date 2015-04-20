@@ -1,6 +1,7 @@
 package popCultureReference;
 
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by brannon on 4/14/15.
@@ -9,8 +10,8 @@ import java.util.HashSet;
 /*Method gets and sets the phrase matches for the Search Terms */
 public class GetsAndSets {
 
-   HashSet<String> containsTheWord = new HashSet<>();
-   String textAreaDisplayer;
+   private Set<String> containsTheWord = new HashSet<>();
+   private String textAreaDisplayer;
    private static int selection;
 
    public int getSelection() {
@@ -21,11 +22,11 @@ public class GetsAndSets {
       this.selection = selection;
    }
 
-   public HashSet<String> getContainsTheWord() {
+   public Set<String> getContainsTheWord() {
       return containsTheWord;
    }
 
-   public void setContainsTheWord(HashSet<String> containsTheWord) {
+   public void setContainsTheWord(Set<String> containsTheWord) {
 
       this.containsTheWord = containsTheWord;
    }
