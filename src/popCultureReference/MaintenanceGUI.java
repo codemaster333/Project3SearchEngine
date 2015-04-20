@@ -163,34 +163,37 @@ public class MaintenanceGUI implements MaintanceInterface {
    @Override
    public void rebuildData() {
       try {
-         String str;
-         BufferedReader in = new BufferedReader(new FileReader("./File Reference Directory/File Reference.txt"));
-         ArrayList<String> list = new ArrayList<>();
-         while ((str = in.readLine()) != null) {
-            list.add(str);
-         }
+         if (!fc.ArrayListCreator().isEmpty()) {
 
-         for (File x : fc.ArrayListCreator()) {
-            if (!x.exists()) {
-               list.remove(x.getPath());
+            String str;
+            BufferedReader in = new BufferedReader(new FileReader("./File Reference Directory/File Reference.txt"));
+            ArrayList<String> list = new ArrayList<>();
+            while ((str = in.readLine()) != null) {
+               list.add(str);
             }
+
+            for (File x : fc.ArrayListCreator()) {
+               if (!x.exists()) {
+                  list.remove(x.getPath());
+               }
+            }
+
+            StringBuilder sb = new StringBuilder();
+            for (String x : list) {
+               sb.append(x + "\n");
+            }
+
+            Path path = Paths.get("./File Reference Directory/File Reference.txt");
+            Files.delete(path);
+
+            File temp = new File("./File Reference Directory/File Reference.txt");
+            FileWriter writer = new FileWriter(temp, true);
+            writer.write(sb.toString() + "\n");
+            writer.flush();
+
+            frame.dispose();
+            initialize();
          }
-
-         StringBuilder sb = new StringBuilder();
-         for (String x : list) {
-            sb.append(x + "\n");
-         }
-
-         Path path = Paths.get("./File Reference Directory/File Reference.txt");
-         Files.delete(path);
-
-         File temp = new File("./File Reference Directory/File Reference.txt");
-         FileWriter writer = new FileWriter(temp, true);
-         writer.write(sb.toString() + "\n");
-         writer.flush();
-
-         frame.dispose();
-         initialize();
 
       } catch (Exception e) {
          e.printStackTrace();
@@ -200,18 +203,21 @@ public class MaintenanceGUI implements MaintanceInterface {
    /* Removes selected files from the Maintenance menu*/
 
    public void removeFile() {
-      System.out.println(getsAndSets.getSelection());
       try {
-         String selectedPath = updateData()[getsAndSets.getSelection()][0];
-         fc.FileObliterator(selectedPath);
-         frame.dispose();
-         initialize();
+         if (!fc.ArrayListCreator().isEmpty()) {
 
+            System.out.println(getsAndSets.getSelection());
+
+            String selectedPath = updateData()[getsAndSets.getSelection()][0];
+            fc.FileObliterator(selectedPath);
+            frame.dispose();
+            initialize();
+
+
+         }
       } catch (IOException e) {
          e.printStackTrace();
       }
-
-
    }
 
    public String[][] updateData() throws IOException {

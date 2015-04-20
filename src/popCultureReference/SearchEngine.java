@@ -107,7 +107,7 @@ public class SearchEngine implements MainWindow {
       menuBar.add(helpMenu);
 
       JMenuItem aboutItem = new JMenuItem("About");
-      aboutItem.addActionListener(e -> JOptionPane.showMessageDialog(null, " Created by Jordan Hart, Brannon Centeno, Kish Moore and Alexis Herrera"));
+      aboutItem.addActionListener(e -> JOptionPane.showMessageDialog(null, " Created by Jordan Hart, Brannon Centeno, Kish Moore, Steven B, and Alexis Herrera"));
       helpMenu.add(aboutItem);
 
       frame.getContentPane().setLayout(new BorderLayout(0, 0));
