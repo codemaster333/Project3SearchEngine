@@ -137,6 +137,29 @@ public class FileCreator {
 
    }
 
+   public ArrayList<String> HashMapExplosion(File file) throws Exception{
+      ArrayList<String> toBeReturned = new ArrayList<>();
+      BufferedReader in = new BufferedReader(new FileReader(file));
+      String str;
+
+      StringBuilder sb = new StringBuilder();
+
+      while ((str = in.readLine()) != null) {
+         sb.append(str + " ");
+      }
+
+
+      Scanner sc = new Scanner(wordSeparator(sb.toString()));
+      int iterator = 0;
+      while(sc.hasNextLine()){
+         toBeReturned.add(iterator, sc.nextLine());
+      }
+
+
+      return toBeReturned;
+
+   }
+
 
 
    //This method takes in a string and changes it
@@ -145,15 +168,5 @@ public class FileCreator {
       return str.replace(' ', '\n');
    }
 
-   public ArrayList<String> stringFling(ArrayList<File> fileArrayList) throws IOException {
-      SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-      ArrayList<String> stringArrayList = new ArrayList<>();
-      int iterator = 0;
-      for (File x : fileArrayList) {
-         stringArrayList.add(iterator, "Name: " + x.getName() + "\nPath: " + x.getAbsolutePath() + "\nLast Modified: " + sdf.format(x.lastModified()));
-         iterator++;
-      }
 
-      return stringArrayList;
-   }
 }

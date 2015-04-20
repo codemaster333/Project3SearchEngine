@@ -351,26 +351,47 @@ public class SearchEngine implements MainWindow {
 
    @Override
    public void exactPhrase(String terms) {
-
       try {
          int iterator = 0;
-         ArrayList<String> exactPhrasesFromFile = new ArrayList<>();
+         String separated = fc.wordSeparator(terms);
+         ArrayList<String> separatedTerms = new ArrayList<>();
+         HashMap<String, ArrayList<String>> shitContainter = new HashMap<>();
 
-         StringBuilder sb = new StringBuilder();
 
-         for(File x: fc.ArrayListCreator()){
-            BufferedReader in = new BufferedReader(new FileReader(x));
-            String line;
+         Scanner sc = new Scanner(separated);
 
-            while ((line = in.readLine()) != null) {
-               sb.append(line + " ");
-            }
-
-            exactPhrasesFromFile.add(iterator, sb.toString());
+         while(sc.hasNextLine()){
+            separatedTerms.add(0, sc.nextLine());
             iterator++;
          }
 
-         //
+         int iterator2 = 0;
+
+         for(File x: fc.ArrayListCreator()){
+            try {
+               shitContainter.put(x.getName(), fc.HashMapExplosion(x));
+            } catch (Exception e) {e.printStackTrace();}
+
+         }
+
+         for(String x: separatedTerms){
+
+            if(shitContainter.containsValue(x)){
+
+               System.out.println("The word contained is" + x);
+
+            }
+
+
+
+         }
+
+
+
+
+
+
+
 
 
 
