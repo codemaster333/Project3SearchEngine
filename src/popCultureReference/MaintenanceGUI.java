@@ -175,8 +175,11 @@ public class MaintenanceGUI implements MaintanceInterface {
             for (File x : fc.ArrayListCreator()) {
                if (!x.exists()) {
                   list.remove(x.getPath());
+                  list.trimToSize();
                }
             }
+
+            list.trimToSize();
 
             StringBuilder sb = new StringBuilder();
             for (String x : list) {

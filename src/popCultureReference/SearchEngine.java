@@ -354,8 +354,21 @@ public class SearchEngine implements MainWindow {
 
    @Override
    public void exactPhrase(String terms) {
+      List<String> searchTerms = new ArrayList<String>();
+      int iterator = 0;
 
-      System.out.println("Still not functional");
+      terms = fc.wordSeparator(terms);
+      Scanner sc = new Scanner(terms);
+
+      while(sc.hasNextLine()){
+         searchTerms.add(iterator, sc.nextLine());
+      }
+
+      System.out.println(searchTerms);
+
+
+
+
 
    }
 
