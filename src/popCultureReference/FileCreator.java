@@ -85,6 +85,7 @@ public class FileCreator {
 
       for (String x : list) {
 
+
          File file = new File(x);
          fileList.add(file);
       }
@@ -103,7 +104,7 @@ public class FileCreator {
       String line;
 
       while ((line = in.readLine()) != null) {
-         sb.append(wordSeparator(line + " "));
+         sb.append(wordSeparator(line.replace("’","'") + " "));
       }
 
 
@@ -133,6 +134,8 @@ public class FileCreator {
       return string;
 
    }
+
+
 
 
    //This method takes in a string and changes it

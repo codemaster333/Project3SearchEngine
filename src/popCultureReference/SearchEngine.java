@@ -143,7 +143,7 @@ public class SearchEngine implements MainWindow {
             case 3:
                exactPhrase(terms);
 
-               //textArea.setText(getsAndSets.getTextAreaDisplayer());
+               textArea.setText(getsAndSets.getTextAreaDisplayer());
                break;
 
             default:
@@ -354,19 +354,85 @@ public class SearchEngine implements MainWindow {
 
    @Override
    public void exactPhrase(String terms) {
-      List<String> searchTerms = new ArrayList<String>();
-      int iterator = 0;
+      try {
+         String[] separatedTerms = terms.split(" ");
+         Set<String> fileMatches = new HashSet<>();
+         List<File> files = fc.ArrayListCreator();
 
-      terms = fc.wordSeparator(terms);
-      Scanner sc = new Scanner(terms);
 
-      while(sc.hasNextLine()){
-         searchTerms.add(iterator, sc.nextLine());
+         for(File x: files){
+            int iterator = 0;
+            List<String> fileString = fc.FileToString(x);
+
+            if(fileString.contains(separatedTerms[0])){
+               int startingIndex = fileString.indexOf(separatedTerms[0]);
+               System.out.println(startingIndex);
+
+
+             System.out.println(fileString);
+               List<String> lister = fileString.subList(startingIndex, startingIndex + (separatedTerms.length));
+               String[] fileStringArray = Arrays.copyOf(lister.toArray(), lister.toArray().length, String[].class);
+
+               for(int i = 0; separatedTerms.length > i; i++){
+                  System.out.println(fileStringArray[i]);
+                  System.out.println(separatedTerms[i]);
+
+
+               }
+
+               List<Boolean> bool = new ArrayList<>();
+               int ear = 0;
+              for(String fuccboi: fileStringArray){
+
+                 if(fileStringArray[ear].equals(separatedTerms[ear])){
+                    bool.add(ear ,true);
+                 }
+
+                 else{
+                    bool.add(ear, false);
+                 }
+
+                 System.out.println(fileStringArray[ear]);
+                 System.out.println(separatedTerms[ear]);
+
+
+                  ear++;
+
+                 System.out.println(bool);
+
+              }
+
+               if(!bool.contains(false)){
+                  fileMatches.add(x.getName());
+               }
+
+
+
+
+
+
+            }
+
+
+
+
+
+
+         }
+
+
+
+
+
+
+         getsAndSets.setContainsTheWord(fileMatches);
+         getsAndSets.setTextAreaDisplayer(fc.changeHashSetIntoText(getsAndSets.getContainsTheWord()));
+
+
+
+      }catch (Exception e){
+         e.printStackTrace();
       }
-
-      System.out.println(searchTerms);
-
-
 
 
 
